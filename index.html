@@ -1155,38 +1155,60 @@
         emailjs.init("rES387Z_beB0IEiRm");
 
         // Funksie om individuele vraagranglys te valideer
-        function validateRankings(questionNumber) {
-            const selects = document.querySelectorAll(`select[name^="q${questionNumber}_"]`);
-            const selectedValues = Array.from(selects).map(select => select.value);
-            const errorElement = document.getElementById(`error_q${questionNumber}`);
-            
-            // Versteek enige vorige foutboodskap
-            if (errorElement) {
-                errorElement.style.display = 'none';
-                errorElement.textContent = '';
-            }
+        // Funksie om individuele vraagranglys te valideer
+function validateRankings(questionNumber) {
+    const selects = document.querySelectorAll(`select[name^="q${questionNumber}_"]`);
+    // Haal die GEKIESDE TEKS WAARDE (1, 2, 3, 4) vir elke select element
+    const selectedRankTexts = Array.from(selects).map(select => {
+        // Kry die geselekteerde option element
+        const selectedOption = select.options[select.selectedIndex];
+        // Gee die teks inhoud van die geselekteerde option terug
+        return selectedOption ? selectedOption.textContent : '';
+    });
 
-            // Kontroleer of alle opsies gekies is
-            if (selectedValues.includes('')) {
-                if (errorElement) {
-                    errorElement.textContent = 'Alle opsies in hierdie vraag moet gekies word.';
-                    errorElement.style.display = 'block';
-                }
-                return false;
-            }
+    const errorElement = document.getElementById(`error_q${questionNumber}`);
+    
+    // Versteek enige vorige foutboodskap
+    if (errorElement) {
+        errorElement.style.display = 'none';
+        errorElement.textContent = '';
+    }
 
-            // Kontroleer vir duplikate
-            const uniqueValues = new Set(selectedValues);
-            if (uniqueValues.size !== selectedValues.length) {
-                if (errorElement) {
-                    errorElement.textContent = 'Elke rang moet net een keer per vraag gebruik word (1-4).';
-                    errorElement.style.display = 'block';
-                }
-                return false;
-            }
-            return true;
+    // Kontroleer of alle opsies gekies is (leë string beteken "Kies rang")
+    if (selectedRankTexts.includes('Kies rang') || selectedRankTexts.includes('')) { // Voeg "Kies rang" by vir robuustheid
+        if (errorElement) {
+            errorElement.textContent = 'Alle opsies in hierdie vraag moet gekies word.';
+            errorElement.style.display = 'block';
         }
+        return false;
+    }
 
+    // Kontroleer vir duplikate RANG waardes (1, 2, 3, 4)
+    const uniqueRankTexts = new Set(selectedRankTexts);
+    if (uniqueRankTexts.size !== selectedRankTexts.length) {
+        if (errorElement) {
+            errorElement.textContent = 'Elke rang moet net een keer per vraag gebruik word (1, 2, 3, 4).'; // Verduidelik die rangorde
+            errorElement.style.display = 'block';
+        }
+        return false;
+    }
+
+    // Kontroleer of die rangordes presies 1, 2, 3, 4 is
+    const expectedRanks = ['1', '2', '3', '4'];
+    const sortedSelectedRanks = [...selectedRankTexts].sort(); // Sorteer om vergelyking makliker te maak
+
+    for (let i = 0; i < expectedRanks.length; i++) {
+        if (sortedSelectedRanks[i] !== expectedRanks[i]) {
+            if (errorElement) {
+                errorElement.textContent = 'Die rangordes moet presies 1, 2, 3, 4 wees, sonder weglatings.';
+                errorElement.style.display = 'block';
+            }
+            return false;
+        }
+    }
+    
+    return true; // As alles deurgegaan het
+}
         // Funksie om DiSC-tellings te bereken
         function calculateScores(formData) {
             const scores = { D: 0, I: 0, S: 0, C: 0 };
