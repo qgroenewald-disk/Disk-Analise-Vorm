@@ -462,20 +462,16 @@
                     const selectElements = questionBlock.querySelectorAll('select');
                     selectElements.forEach(select => {
                         select.addEventListener('change', () => {
-                            // When any dropdown in any question changes, validate all questions up to the current one
-                            // This ensures that if a user skips a question and answers a later one,
-                            // the skipped question's error will appear.
-                            for (let i = 0; i <= index; i++) {
-                                const currentQuestionInputs = Array.from(document.getElementsByName(`q${i}`));
-                                const allSelected = currentQuestionInputs.every(input => input.value !== '');
+                            // Get all selects for the current question block
+                            const currentQuestionInputs = Array.from(questionBlock.querySelectorAll('select'));
+                            const allSelected = currentQuestionInputs.every(input => input.value !== '');
 
-                                if (allSelected) {
-                                    validateQuestion(i); // Validate if all 4 are chosen and unique
-                                } else {
-                                    // If not all are selected, show the error message for this question
-                                    document.getElementById(`q-error-${i}`).textContent = "Alle opsies vir hierdie vraag moet ingevul word (1-4).";
-                                    document.getElementById(`q-error-${i}`).style.display = 'block';
-                                }
+                            if (allSelected) {
+                                // If all 4 options are selected, then validate this specific question
+                                validateQuestion(index);
+                            } else {
+                                // If not all are selected, ensure the error message for this question is hidden
+                                document.getElementById(`q-error-${index}`).style.display = 'none'; // Corrected: changed ` to '
                             }
                         });
                     });
