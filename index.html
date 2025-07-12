@@ -32,23 +32,43 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         header {
-            text-align: center;
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            align-items: flex-start; /* Align content to the left */
             border-bottom: 2px solid var(--primary-color);
             margin-bottom: 20px;
             padding-bottom: 20px;
+            padding-left: 10px; /* Small padding for the whole header content */
         }
-        h1 {
+        .logo-and-title-wrapper {
+            display: flex; /* For logo and h1 side-by-side */
+            align-items: center; /* Vertically center logo and h1 */
+            gap: 15px; /* Space between logo and h1 */
+            margin-bottom: 15px; /* Space between title line and instructions */
+            width: 100%; /* Ensure it takes full width to allow text-align within */
+        }
+        .logo {
+            width: 100px;
+            height: auto;
+            border-radius: 5px;
+            flex-shrink: 0; /* Prevent logo from shrinking */
+        }
+        .logo-and-title-wrapper h1 {
             color: var(--primary-color);
-            margin: 0;
+            margin: 0; /* Remove default margin from h1 */
+            text-align: left; /* Ensure title aligns left within its wrapper */
+            flex-grow: 1; /* Allow title to take remaining space */
         }
         .instructions {
             background-color: #e7f3fe;
             border-left: 4px solid var(--primary-color);
             padding: 15px;
-            margin-top: 15px;
             border-radius: 5px;
             font-size: 0.95em;
             text-align: left;
+            margin-top: 0; /* Override default margin if any */
+            width: 100%; /* Ensure instructions take full width */
+            box-sizing: border-box; /* Include padding in width calculation */
         }
         .form-group {
             margin-bottom: 20px;
@@ -70,7 +90,7 @@
             padding: 20px;
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            background-color: #fafafa;
+            border-left: 4px solid var(--primary-color); /* Added left border */
         }
         .question-block h3 {
             margin-top: 0;
@@ -81,8 +101,8 @@
             align-items: center;
             margin-bottom: 10px;
         }
-        .answer-option select { /* Styling for the dropdown */
-            width: 70px; /* Slightly wider for better appearance */
+        .answer-option select {
+            width: 70px;
             padding: 8px;
             margin-right: 15px;
             border: 1px solid var(--border-color);
@@ -99,7 +119,7 @@
             font-weight: bold;
             font-size: 0.9em;
             margin-top: 5px;
-            display: none; /* Hidden by default */
+            display: none;
         }
         #form-error {
             text-align: center;
@@ -166,7 +186,10 @@
 <body>
     <div class="container">
         <header>
-            <h1>DiSC Persoonlikheidsanalise</h1>
+            <div class="logo-and-title-wrapper">
+                <img src="https://i.imgur.com/G6NIgq3.jpeg" alt="DiSC Analysis Logo" class="logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/cccccc/000000?text=Logo';">
+                <h1>DiSC Persoonlikheidsanalise</h1>
+            </div>
             <p class="instructions">
                 Vir elke vraag hieronder, rangskik die vier stellings van <strong>1 tot 4</strong>.
                 <br><strong>1</strong> = Beskryf my die beste; <strong>4</strong> = Beskryf my die minste.
@@ -205,7 +228,7 @@
                     ]
                 },
                 {
-                    questionText: "Vir soverre dit die dinge betref wat die lewe oor my pad bring, is ek:",
+                    questionText: "Wanneer die lewe dinge oor my pad bring, is ek gewoonlik:",
                     options: [
                         { text: "Ondernemend, benut geleenthede", value: "D" },
                         { text: "Nugter, speel veilig", value: "C" },
@@ -317,7 +340,7 @@
                     options: [
                         { text: "Innemend (trek ander aan)", value: "I" },
                         { text: "Selfondersoekend, introspektief", value: "C" },
-                        { text: "Selfversekerd, invloedryk", value: "D" },
+                        { text: "Selfversekerd, invloedryk", "value": "D" },
                         { text: "Standvastig, voorspelbaar", value: "S" }
                     ]
                 },
@@ -381,6 +404,7 @@
             const form = document.getElementById('disc-form');
             const formError = document.getElementById('form-error');
             const resultsText = document.getElementById('results-text');
+            const scoring = { 1: 4, 2: 3, 3: 2, 4: 1 }; // Scoring: 1st choice gets 4 points, 4th choice gets 1 point
 
             // Function to generate the dropdown options for 1-4
             function generateDropdownOptions() {
@@ -389,6 +413,27 @@
                     optionsHtml += `<option value="${i}">${i}</option>`;
                 }
                 return optionsHtml;
+            }
+
+            // Function to validate a single question block
+            function validateQuestion(questionIndex) {
+                const inputs = Array.from(document.getElementsByName(`q${questionIndex}`));
+                const values = inputs.map(input => input.value).filter(v => v !== ''); // Filter out empty strings
+                const valueSet = new Set(values);
+                const errorEl = document.getElementById(`q-error-${questionIndex}`);
+
+                errorEl.style.display = 'none'; // Hide previous error for this question
+
+                if (values.length !== 4) {
+                    errorEl.textContent = "Alle opsies vir hierdie vraag moet ingevul word (1-4).";
+                    errorEl.style.display = 'block';
+                    return false;
+                } else if (valueSet.size !== 4) {
+                    errorEl.textContent = "Elke nommer (1, 2, 3, 4) mag slegs een keer per vraag gebruik word.";
+                    errorEl.style.display = 'block';
+                    return false;
+                }
+                return true; // Question is valid
             }
 
             function generateQuestions() {
@@ -412,6 +457,28 @@
                         <div id="q-error-${index}" class="error-message"></div>
                     `;
                     questionsContainer.appendChild(questionBlock);
+
+                    // Add change event listeners to each select dropdown in this question block
+                    const selectElements = questionBlock.querySelectorAll('select');
+                    selectElements.forEach(select => {
+                        select.addEventListener('change', () => {
+                            // When any dropdown in any question changes, validate all questions up to the current one
+                            // This ensures that if a user skips a question and answers a later one,
+                            // the skipped question's error will appear.
+                            for (let i = 0; i <= index; i++) {
+                                const currentQuestionInputs = Array.from(document.getElementsByName(`q${i}`));
+                                const allSelected = currentQuestionInputs.every(input => input.value !== '');
+
+                                if (allSelected) {
+                                    validateQuestion(i); // Validate if all 4 are chosen and unique
+                                } else {
+                                    // If not all are selected, show the error message for this question
+                                    document.getElementById(`q-error-${i}`).textContent = "Alle opsies vir hierdie vraag moet ingevul word (1-4).";
+                                    document.getElementById(`q-error-${i}`).style.display = 'block';
+                                }
+                            }
+                        });
+                    });
                 });
             }
 
@@ -419,29 +486,20 @@
                 event.preventDefault();
 
                 formError.style.display = 'none';
-                document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none'); // Hide all previous errors
+                // Clear all individual question errors before re-validating for submission
+                document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
 
-                let isValid = true;
+                let overallFormIsValid = true;
                 const scores = { D: 0, I: 0, S: 0, C: 0 };
-                const scoring = { 1: 4, 2: 3, 3: 2, 4: 1 }; // Scoring: 1st choice gets 4 points, 4th choice gets 1 point
 
-                // Validate each question individually
+                // Validate each question and accumulate scores
                 for (let i = 0; i < questions.length; i++) {
-                    const inputs = Array.from(document.getElementsByName(`q${i}`));
-                    const values = inputs.map(input => input.value).filter(v => v !== ''); // Filter out empty strings
-                    const valueSet = new Set(values);
-                    const errorEl = document.getElementById(`q-error-${i}`);
-
-                    if (values.length !== 4) {
-                        errorEl.textContent = "Alle opsies vir hierdie vraag moet ingevul word (1-4).";
-                        errorEl.style.display = 'block';
-                        isValid = false;
-                    } else if (valueSet.size !== 4) {
-                        errorEl.textContent = "Elke nommer (1, 2, 3, 4) mag slegs een keer per vraag gebruik word.";
-                        errorEl.style.display = 'block';
-                        isValid = false;
+                    const questionIsValid = validateQuestion(i); // Run final validation for each question
+                    if (!questionIsValid) {
+                        overallFormIsValid = false;
                     } else {
                         // If valid, calculate scores for this question
+                        const inputs = Array.from(document.getElementsByName(`q${i}`));
                         inputs.forEach(input => {
                             const rank = parseInt(input.value, 10);
                             const discType = input.dataset.disc;
@@ -456,16 +514,13 @@
                 if (!document.getElementById('userName').value.trim()) {
                     formError.textContent = "Vul asseblief jou volle naam in.";
                     formError.style.display = 'block';
-                    isValid = false;
+                    overallFormIsValid = false;
                 }
 
-                if (!isValid) {
-                    // Only show a general form error if there are specific question errors,
-                    // or if the name is missing. Specific errors are handled per question.
-                    if (document.querySelectorAll('.error-message[style*="display: block"]').length > 0 || !document.getElementById('userName').value.trim()) {
-                         formError.textContent = "Daar is foute in jou antwoorde. Maak asseblief seker jou naam is ingevul en dat alle vrae korrek beantwoord is.";
-                         formError.style.display = 'block';
-                    }
+                if (!overallFormIsValid) {
+                    // Show a general form error if any specific question errors or name error exist
+                    formError.textContent = "Daar is foute in jou antwoorde. Maak asseblief seker jou naam is ingevul en dat alle vrae korrek beantwoord is.";
+                    formError.style.display = 'block';
                     window.scrollTo(0, 0); // Scroll to top to show general error if any
                     return;
                 }
