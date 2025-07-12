@@ -1343,13 +1343,24 @@
 
             // Display results on the page
             displayResults(scores);
+	const maxPossibleScore = 40; // <-- PAS HIERDIE WAARDE AAN AS U DISC METODOLOGIE VERSKIL!
 
+            const d_score_percentage = ((scores.D / maxPossibleScore) * 100).toFixed(0);
+            const i_score_percentage = ((scores.I / maxPossibleScore) * 100).toFixed(0);
+            const s_score_percentage = ((scores.S / maxPossibleScore) * 100).toFixed(0);
+            const c_score_percentage = ((scores.C / maxPossibleScore) * 100).toFixed(0);
             const templateParams = {
-		user_name: userName.value, // Get the actual value from the input field
-                d_score: scores.D,
-                i_score: scores.I,
-                s_score: scores.S,
-                c_score: scores.C
+		user_name: userName.value,
+    		// Stuur die rou tellings (as die sjabloon dit benodig, of verwyder dit as jy net persentasies stuur)
+   		d_score: scores.D,
+    		i_score: scores.I,
+    		s_score: scores.S,
+    		c_score: scores.C,
+   	 	// Stuur die persentasies met die korrekte naam
+    		d_score_percentage: d_score_percentage,
+    		i_score_percentage: i_score_percentage,
+    		s_score_percentage: s_score_percentage,
+    		c_score_percentage: c_score_percentage
             };
 
             emailjs.send('service_cv71ym3', 'template_j1u5nyo', templateParams)
