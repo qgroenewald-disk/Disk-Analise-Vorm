@@ -282,8 +282,7 @@
         <div class="header">
 	<img src="https://i.imgur.com/G6NIgq3.jpg" alt="Logo" class="logo">
             <h1>DiSC Analise Vraelys</h1>
-            <p>Rangskik elke antwoord van 1 (stem die meeste saam) tot 4 (stem die minste saam)
-	       Let wel: Elke rangorde (1-4) mag slegs een keer per vraag gebruik word.</p>
+            <p>Rangskik elke antwoord van 1 (stem die meeste saam) tot 4 (stem die minste saam)</p>
         </div>
 
         <div class="form-container">
@@ -1214,7 +1213,7 @@
 	const userNameError = document.getElementById('error_userName');
         
         // Initialize EmailJS (only once, at the top level of the script)
-        emailjs.init('rES387Z_beB0IEiRm');
+        emailjs.init('mFQR_ik8VT0dICnXf');
 
         // Track form progress
         function updateProgress() {
@@ -1289,98 +1288,77 @@
         }
 
         // Display DiSC results on the chart
-function displayResults(scores) {
-    // Update score text
-    dScoreSpan.textContent = scores.D;
-    iScoreSpan.textContent = scores.I;
-    sScoreSpan.textContent = scores.S;
-    cScoreSpan.textContent = scores.C;
+        function displayResults(scores) {
+            // Update score text
+            dScoreSpan.textContent = scores.D;
+            iScoreSpan.textContent = scores.I;
+            sScoreSpan.textContent = scores.S;
+            cScoreSpan.textContent = scores.C;
 
-    // Calculate percentage for bar width (assuming max possible score is 20 questions * 4 points/question = 80)
-    const maxScore = 20 * 4; // This is correct based on your previous code
+            // Calculate percentage for bar width (assuming max possible score is 20 questions * 4 points/question = 80)
+            const maxScore = 20 * 4; 
 
-    dBar.style.width = ((scores.D / maxScore) * 100) + '%';
-    iBar.style.width = ((scores.I / maxScore) * 100) + '%';
-    sBar.style.width = ((scores.S / maxScore) * 100) + '%';
-    cBar.style.width = ((scores.C / maxScore) * 100) + '%';
+            dBar.style.width = ((scores.D / maxScore) * 100) + '%';
+            iBar.style.width = ((scores.I / maxScore) * 100) + '%';
+            sBar.style.width = ((scores.S / maxScore) * 100) + '%';
+            cBar.style.width = ((scores.C / maxScore) * 100) + '%';
 
-    dBar.textContent = scores.D; // Display score inside bar
-    iBar.textContent = scores.I;
-    sBar.textContent = scores.S;
-    cBar.textContent = scores.C;
+            dBar.textContent = scores.D; // Display score inside bar
+            iBar.textContent = scores.I;
+            sBar.textContent = scores.S;
+            cBar.textContent = scores.C;
 
-    resultsContainer.style.display = 'block'; // Show the results section
-    // Optional: Scroll to results
-    resultsContainer.scrollIntoView({ behavior: 'smooth' });
-}
-
-
-document.getElementById('discForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent default form submission
-
-    // Validate all questions before submission
-    let allValid = true;
-    for (let i = 1; i <= 20; i++) {
-        if (!validateRankings(i)) {
-            allValid = false;
+            resultsContainer.style.display = 'block'; // Show the results section
+            // Optional: Scroll to results
+            resultsContainer.scrollIntoView({ behavior: 'smooth' });
         }
-        // Also check if all options in a group are selected
-        const selects = document.querySelectorAll(`select[name^="q${i}_"]`);
-        const allOptionsSelected = Array.from(selects).every(select => select.value !== '');
-        if (!allOptionsSelected) {
-            document.getElementById(`error_q${i}`).textContent = 'Alle opsies in hierdie vraag moet gekies word.';
-            document.getElementById(`error_q${i}`).style.display = 'block';
-            allValid = false;
-        }
-    }
 
-    if (!allValid) {
-        alert('Voltooi asseblief alle vrae korrek voordat u indien.');
-        return; // Stop the submission if not all valid
-    }
 
-    const formData = new FormData(this);
-    const scores = calculateScores(formData); // This function calculates your D, I, S, C scores
+        document.getElementById('discForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
 
-    // Display results on the page (this part is working)
-    displayResults(scores);
+            // Validate all questions before submission
+            let allValid = true;
+            for (let i = 1; i <= 20; i++) {
+                if (!validateRankings(i)) {
+                    allValid = false;
+                }
+                // Also check if all options in a group are selected
+                const selects = document.querySelectorAll(`select[name^="q${i}_"]`);
+                const allOptionsSelected = Array.from(selects).every(select => select.value !== '');
+                if (!allOptionsSelected) {
+                    document.getElementById(`error_q${i}`).textContent = 'Alle opsies in hierdie vraag moet gekies word.';
+                    document.getElementById(`error_q${i}`).style.display = 'block';
+                    allValid = false;
+                }
+            }
 
-    // --- NUWE KODE HIER ---
-    // Calculate percentages for EmailJS template, just like in displayResults
-    const maxScore = 20 * 4; // Use the same maxScore for consistency
+            if (!allValid) {
+                alert('Voltooi asseblief alle vrae korrek voordat u indien.');
+                return; // Stop the submission if not all valid
+            }
 
-    const dScorePercentage = ((scores.D / maxScore) * 100).toFixed(0); // .toFixed(0) for whole number percentage
-    const iScorePercentage = ((scores.I / maxScore) * 100).toFixed(0);
-    const sScorePercentage = ((scores.S / maxScore) * 100).toFixed(0);
-    const cScorePercentage = ((scores.C / maxScore) * 100).toFixed(0);
-    // --- EINDE VAN NUWE KODE ---
+            const formData = new FormData(this);
+            const scores = calculateScores(formData);
 
-    const templateParams = {
-        user_name: userName.value, // Get the actual value from the input field
-        d_score: scores.D,
-        i_score: scores.I,
-        s_score: scores.S,
-        c_score: scores.C,
-        // --- VOEG HIERDIE BY ---
-        d_score_percentage: dScorePercentage,
-        i_score_percentage: iScorePercentage,
-        s_score_percentage: sScorePercentage,
-        c_score_percentage: cScorePercentage
-        // --- EINDE VAN TOEVOEGINGS ---
-    };
+            // Display results on the page
+            displayResults(scores);
 
-    // Now send the email with all necessary parameters
-    emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
-        .then(function(response) {
-            console.log('SUCCESS!', response.status, response.text);
-            alert('Dankie! Jou DiSC-resultate is gestuur.');
-            // Opsioneel: Versteek die vorm en wys 'n sukses boodskap
-            // discForm.style.display = 'none';
-        }, function(error) {
-            console.log('FAILED...', error);
-            alert('Daar was 'n fout met die stuur van jou antwoorde. Probeer asseblief weer.');
+            const templateParams = {
+		user_name: userName.value, // Get the actual value from the input field
+                d_score: scores.D,
+                i_score: scores.I,
+                s_score: scores.S,
+                c_score: scores.C
+            };
+
+            emailjs.send('service_cv71ym3', 'template_j1u5nyo', templateParams)
+                .then(function(response) {
+                    alert('DiSC resultate is gestuur!');
+                }, function(error) {
+                    alert('Fout met e-pos stuur: ' + error.text);
+                });
         });
-});
     </script>
 </body>
 </html>
