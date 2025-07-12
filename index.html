@@ -130,6 +130,10 @@ margin-top: 30px;
 padding-top: 20px;
 border-top: 1px solid var(--border-color);
 }
+#results-text {
+margin-top: 15px;
+font-size: 1.1em;
+}
 #email-status {
 text-align: center;
 margin-top: 20px;
@@ -147,13 +151,12 @@ color: var(--error-color);
 }
 </style>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script type="text/javascript">
 // Initialiseer EmailJS met jou Public Key
 (function(){
 emailjs.init({
-[cite_start]publicKey: "rES387Z_beB0IEiRm", // [cite: 167]
+publicKey: "rES387Z_beB0IEiRm",
 });
 })();
 </script>
@@ -163,15 +166,15 @@ emailjs.init({
 <header>
 <h1>DiSC Persoonlikheidsanalise</h1>
 <p class="instructions">
-[cite_start]Vir elke vraag hieronder, rangskik die vier stellings van <strong>1 tot 4</strong>. [cite: 177]
-<br><strong>1</strong> = Beskryf my die beste; [cite_start]<strong>4</strong> = Beskryf my die minste. [cite: 178]
-[cite_start]<br>Elke nommer (1, 2, 3, 4) mag slegs <strong>een keer per vraag</strong> gebruik word. [cite: 179]
+Vir elke vraag hieronder, rangskik die vier stellings van <strong>1 tot 4</strong>.
+<br><strong>1</strong> = Beskryf my die beste; <strong>4</strong> = Beskryf my die minste.
+<br>Elke nommer (1, 2, 3, 4) mag slegs <strong>een keer per vraag</strong> gebruik word.
 </p>
 </header>
 <form id="disc-form">
 <div class="form-group">
-[cite_start]<label for="userName">Volle Naam:</label> [cite: 184]
-[cite_start]<input type="text" id="userName" name="userName" required> [cite: 185]
+<label for="userName">Volle Naam:</label>
+<input type="text" id="userName" name="userName" required>
 </div>
 <div id="questions-container">
 </div>
@@ -180,7 +183,7 @@ emailjs.init({
 </form>
 <div id="results-container" class="hidden">
 <h2>Jou Resultate</h2>
-<canvas id="results-chart"></canvas>
+<div id="results-text"></div>
 <div id="email-status"></div>
 </div>
 </div>
@@ -189,190 +192,190 @@ document.addEventListener('DOMContentLoaded', function () {
 // Data geneem uit die voorsiende dokument
 const questions = [
 {
-[cite_start]questionText: "'n Mens sou die manier waarop ek in my verhoudings met ander mense optree, kon beskryf as:", [cite: 203]
+questionText: "'n Mens sou die manier waarop ek in my verhoudings met ander mense optree, kon beskryf as:",
 options: [
-[cite_start]{ text: "Saggeaard, goedhartig", value: "S" }, [cite: 205]
-[cite_start]{ text: "Oordeelkundig, versigtig", value: "C" }, [cite: 206]
-[cite_start]{ text: "Beslis, selfgeldend", value: "D" }, [cite: 207]
-[cite_start]{ text: "Oorspronklik, vol planne", value: "I" } [cite: 208]
+{ text: "Saggeaard, goedhartig", value: "S" },
+{ text: "Oordeelkundig, versigtig", value: "C" },
+{ text: "Beslis, selfgeldend", value: "D" },
+{ text: "Oorspronklik, vol planne", value: "I" }
 ]
 },
 {
-[cite_start]questionText: "Vir soverre dit die dinge betref wat die lewe oor my pad bring, is ek:", [cite: 212]
+questionText: "Vir soverre dit die dinge betref wat die lewe oor my pad bring, is ek:",
 options: [
-[cite_start]{ text: "Ondernemend, benut geleenthede", value: "D" }, [cite: 214]
-[cite_start]{ text: "Nugter, speel veilig", value: "C" }, [cite: 215]
-[cite_start]{ text: "Sorgvry, opgewek", value: "I" }, [cite: 216]
-[cite_start]{ text: "Gelykmatig, geduldig", value: "S" } [cite: 217]
+{ text: "Ondernemend, benut geleenthede", value: "D" },
+{ text: "Nugter, speel veilig", value: "C" },
+{ text: "Sorgvry, opgewek", value: "I" },
+{ text: "Gelykmatig, geduldig", value: "S" }
 ]
 },
 {
-[cite_start]questionText: "In my samewerking met ander mense sal ek normaalweg as volg optree:", [cite: 221]
+questionText: "In my samewerking met ander mense sal ek normaalweg as volg optree:",
 options: [
-[cite_start]{ text: "Onderhandelend, diplomaties", value: "I" }, [cite: 223]
-[cite_start]{ text: "Mededingend, kompeterend", value: "D" }, [cite: 224]
-[cite_start]{ text: "Bedagsaam, sensitief vir ander", value: "S" }, [cite: 225]
-[cite_start]{ text: "Stimulerend, aktiverend", value: "I" } [cite: 226]
+{ text: "Onderhandelend, diplomaties", value: "I" },
+{ text: "Mededingend, kompeterend", value: "D" },
+{ text: "Bedagsaam, sensitief vir ander", value: "S" },
+{ text: "Stimulerend, aktiverend", value: "I" }
 ]
 },
 {
-[cite_start]questionText: "Wanneer ek oor my lewe dink beleef ek myself as:", [cite: 230]
+questionText: "Wanneer ek oor my lewe dink beleef ek myself as:",
 options: [
-[cite_start]{ text: "Vergenoegd, tevrede", value: "S" }, [cite: 232]
-[cite_start]{ text: "Op pad na duidelike doelwitte", value: "D" }, [cite: 233]
-[cite_start]{ text: "Kreatief, vol nuwe idees", value: "I" }, [cite: 234]
-[cite_start]{ text: "Deeglik, georganiseerd", value: "C" } [cite: 235]
+{ text: "Vergenoegd, tevrede", value: "S" },
+{ text: "Op pad na duidelike doelwitte", value: "D" },
+{ text: "Kreatief, vol nuwe idees", value: "I" },
+{ text: "Deeglik, georganiseerd", value: "C" }
 ]
 },
 {
-[cite_start]questionText: "Ek sal myself beskryf as:", [cite: 239]
+questionText: "Ek sal myself beskryf as:",
 options: [
-[cite_start]{ text: "Doelgerig, vasberade", value: "D" }, [cite: 241]
-[cite_start]{ text: "Akkuraat, presies", value: "C" }, [cite: 242]
-[cite_start]{ text: "Kalm, vredeliewend", value: "S" }, [cite: 243]
-[cite_start]{ text: "Vol lewenslus, prettig", value: "I" } [cite: 244]
+{ text: "Doelgerig, vasberade", value: "D" },
+{ text: "Akkuraat, presies", value: "C" },
+{ text: "Kalm, vredeliewend", value: "S" },
+{ text: "Vol lewenslus, prettig", value: "I" }
 ]
 },
 {
-[cite_start]questionText: "In my sosiale omgang met ander mense sal ek:", [cite: 248]
+questionText: "In my sosiale omgang met ander mense sal ek:",
 options: [
-[cite_start]{ text: "Ander betrek en laat meedoen", value: "I" }, [cite: 250]
-[cite_start]{ text: "Konfronterend wees, argumenteer", value: "D" }, [cite: 251]
-[cite_start]{ text: "Inskiklik, onderdanig wees", value: "S" }, [cite: 252]
-[cite_start]{ text: "Gereserveerd, beheers wees", value: "C" } [cite: 253]
+{ text: "Ander betrek en laat meedoen", value: "I" },
+{ text: "Konfronterend wees, argumenteer", value: "D" },
+{ text: "Inskiklik, onderdanig wees", value: "S" },
+{ text: "Gereserveerd, beheers wees", value: "C" }
 ]
 },
 {
-[cite_start]questionText: "Die styl van menswees wat ek uitstraal, kan beskryf word as:", [cite: 257]
+questionText: "Die styl van menswees wat ek uitstraal, kan beskryf word as:",
 options: [
-[cite_start]{ text: "Goedgeaard, aangenaam", value: "S" }, [cite: 259]
-[cite_start]{ text: "Uitgelate, opgeruimd", value: "I" }, [cite: 260]
-[cite_start]{ text: "Energiek, entoesiasties", value: "I" }, [cite: 261]
-[cite_start]{ text: "Gedissiplineerd, gestruktureerd", value: "C" } [cite: 262]
+{ text: "Goedgeaard, aangenaam", value: "S" },
+{ text: "Uitgelate, opgeruimd", value: "I" },
+{ text: "Energiek, entoesiasties", value: "I" },
+{ text: "Gedissiplineerd, gestruktureerd", value: "C" }
 ]
 },
 {
-[cite_start]questionText: "In my kommunikasie met ander mense is ek:", [cite: 266]
+questionText: "In my kommunikasie met ander mense is ek:",
 options: [
-[cite_start]{ text: "Uitgesproke/stel eie standpunt duidelik", value: "D" }, [cite: 268]
-[cite_start]{ text: "Entoesiasties, positief", value: "I" }, [cite: 269]
-[cite_start]{ text: "Oop vir oortuiging, tentatief", value: "S" }, [cite: 270]
-[cite_start]{ text: "Logies, beredeneerd", value: "C" } [cite: 271]
+{ text: "Uitgesproke/stel eie standpunt duidelik", value: "D" },
+{ text: "Entoesiasties, positief", value: "I" },
+{ text: "Oop vir oortuiging, tentatief", value: "S" },
+{ text: "Logies, beredeneerd", value: "C" }
 ]
 },
 {
-[cite_start]questionText: "Wanneer dit by besluitneming kom, sal ek myself beskryf as:", [cite: 275]
+questionText: "Wanneer dit by besluitneming kom, sal ek myself beskryf as:",
 options: [
-[cite_start]{ text: "Gekontroleerd, deurdag", value: "C" }, [cite: 277]
-[cite_start]{ text: "Beslis, ferm", value: "D" }, [cite: 278]
-[cite_start]{ text: "Impulsief, spontaan", value: "I" }, [cite: 279]
-[cite_start]{ text: "Tegemoetkomend, aanpasbaar", value: "S" } [cite: 280]
+{ text: "Gekontroleerd, deurdag", value: "C" },
+{ text: "Beslis, ferm", value: "D" },
+{ text: "Impulsief, spontaan", value: "I" },
+{ text: "Tegemoetkomend, aanpasbaar", value: "S" }
 ]
 },
 {
-[cite_start]questionText: "Ek sien en beleef myself as 'n persoon wat:", [cite: 284]
+questionText: "Ek sien en beleef myself as 'n persoon wat:",
 options: [
-[cite_start]{ text: "Ondernemend is, uitdagings soek", value: "D" }, [cite: 286]
-[cite_start]{ text: "Oordeelkundig is (kan onderskei)", value: "C" }, [cite: 287]
-[cite_start]{ text: "Uitgaande is, uitreik na ander", value: "I" }, [cite: 288]
-[cite_start]{ text: "Gematigd is, uiterstes vermy", value: "S" } [cite: 289]
+{ text: "Ondernemend is, uitdagings soek", value: "D" },
+{ text: "Oordeelkundig is (kan onderskei)", value: "C" },
+{ text: "Uitgaande is, uitreik na ander", value: "I" },
+{ text: "Gematigd is, uiterstes vermy", value: "S" }
 ]
 },
 {
-[cite_start]questionText: "Ek dink aan myself as 'n persoon wat:", [cite: 293]
+questionText: "Ek dink aan myself as 'n persoon wat:",
 options: [
-[cite_start]{ text: "Ekspressief, eerlik oor my gevoelens is", value: "I" }, [cite: 295]
-[cite_start]{ text: "Opreg is, doen wat reg is", value: "C" }, [cite: 296]
-[cite_start]{ text: "Toonaangewend, in beheer is", value: "D" }, [cite: 297]
-[cite_start]{ text: "Deelnemend, samewerkend is", value: "S" } [cite: 298]
+{ text: "Ekspressief, eerlik oor my gevoelens is", value: "I" },
+{ text: "Opreg is, doen wat reg is", value: "C" },
+{ text: "Toonaangewend, in beheer is", value: "D" },
+{ text: "Deelnemend, samewerkend is", value: "S" }
 ]
 },
 {
-[cite_start]questionText: "Ek is:", [cite: 302]
+questionText: "Ek is:",
 options: [
-[cite_start]{ text: "Uitgaande, ingestel op ander", value: "I" }, [cite: 304]
-[cite_start]{ text: "Pligsgetrou, hou by afsprake", value: "C" }, [cite: 305]
-[cite_start]{ text: "Spanspeler, werk saam", value: "S" }, [cite: 306]
-[cite_start]{ text: "Doelgerig, weet wat ek wil hê", value: "D" } [cite: 307]
+{ text: "Uitgaande, ingestel op ander", value: "I" },
+{ text: "Pligsgetrou, hou by afsprake", value: "C" },
+{ text: "Spanspeler, werk saam", value: "S" },
+{ text: "Doelgerig, weet wat ek wil hê", value: "D" }
 ]
 },
 {
-[cite_start]questionText: "Ek doen dinge gewoonlik:", [cite: 311]
+questionText: "Ek doen dinge gewoonlik:",
 options: [
-[cite_start]{ text: "Bepland, takties", value: "C" }, [cite: 313]
-[cite_start]{ text: "Gelate, gee maklik toe", value: "S" }, [cite: 314]
-[cite_start]{ text: "Opgeruimd, blymoedig", value: "I" }, [cite: 315]
-[cite_start]{ text: "Ferm en met oortuiging", value: "D" } [cite: 316]
+{ text: "Bepland, takties", value: "C" },
+{ text: "Gelate, gee maklik toe", value: "S" },
+{ text: "Opgeruimd, blymoedig", value: "I" },
+{ text: "Ferm en met oortuiging", value: "D" }
 ]
 },
 {
-[cite_start]questionText: "Ek sal my geaardheid beskryf as:", [cite: 320]
+questionText: "Ek sal my geaardheid beskryf as:",
 options: [
-[cite_start]{ text: "Innemend (trek ander aan)", value: "I" }, [cite: 322]
-[cite_start]{ text: "Selfondersoekend, introspektief", value: "C" }, [cite: 323]
-[cite_start]{ text: "Selfversekerd, invloedryk", value: "D" }, [cite: 324]
-[cite_start]{ text: "Standvastig, voorspelbaar", value: "S" } [cite: 325]
+{ text: "Innemend (trek ander aan)", value: "I" },
+{ text: "Selfondersoekend, introspektief", value: "C" },
+{ text: "Selfversekerd, invloedryk", value: "D" },
+{ text: "Standvastig, voorspelbaar", value: "S" }
 ]
 },
 {
-[cite_start]questionText: "My lewensbenadering kan beskryf word met:", [cite: 329]
+questionText: "My lewensbenadering kan beskryf word met:",
 options: [
-[cite_start]{ text: "Verantwoordelik, pligsgetrou", value: "C" }, [cite: 331]
-[cite_start]{ text: "Ondernemend, skeppend", value: "D" }, [cite: 332]
-[cite_start]{ text: "Optimisties, positief", value: "I" }, [cite: 333]
-[cite_start]{ text: "Deeglik, georganiseerd", value: "C" } [cite: 334]
+{ text: "Verantwoordelik, pligsgetrou", value: "C" },
+{ text: "Ondernemend, skeppend", value: "D" },
+{ text: "Optimisties, positief", value: "I" },
+{ text: "Deeglik, georganiseerd", value: "C" }
 ]
 },
 {
-[cite_start]questionText: "As ek oor myself dink in verhouding met andere, sien ek myself as:", [cite: 338]
+questionText: "As ek oor myself dink in verhouding met andere, sien ek myself as:",
 options: [
-[cite_start]{ text: "Selfstandig, onafhanklik", value: "D" }, [cite: 340]
-[cite_start]{ text: "Erkentlik, eerbiedig", value: "S" }, [cite: 341]
-[cite_start]{ text: "Hulpvaardig, ondersteunend", value: "S" }, [cite: 342]
-[cite_start]{ text: "Inspirerend, motiverend", value: "I" } [cite: 343]
+{ text: "Selfstandig, onafhanklik", value: "D" },
+{ text: "Erkentlik, eerbiedig", value: "S" },
+{ text: "Hulpvaardig, ondersteunend", value: "S" },
+{ text: "Inspirerend, motiverend", value: "I" }
 ]
 },
 {
-[cite_start]questionText: "Een van my eienskappe waaroor ek goed voel is, is die feit dat ek:", [cite: 347]
+questionText: "Een van my eienskappe waaroor ek goed voel is, is die feit dat ek:",
 options: [
-[cite_start]{ text: "Aanhoudend is, nie maklik opgee nie", value: "D" }, [cite: 349]
-[cite_start]{ text: "Lojaal/toegewyd teenoor ander is", value: "S" }, [cite: 350]
-[cite_start]{ text: "Opgewek is, van lekker dinge hou", value: "I" }, [cite: 351]
-[cite_start]{ text: "Konsensieus, pligsgetrou is", value: "C" } [cite: 352]
+{ text: "Aanhoudend is, nie maklik opgee nie", value: "D" },
+{ text: "Lojaal/toegewyd teenoor ander is", value: "S" },
+{ text: "Opgewek is, van lekker dinge hou", value: "I" },
+{ text: "Konsensieus, pligsgetrou is", value: "C" }
 ]
 },
 {
-[cite_start]questionText: "Een eienskap van my wat nie altyd so positief deur ander ontvang word nie, is die feit dat ek soms:", [cite: 356]
+questionText: "Een eienskap van my wat nie altyd so positief deur ander ontvang word nie, is die feit dat ek soms:",
 options: [
-[cite_start]{ text: "Kieskeurig, puntenerig is", value: "C" }, [cite: 358]
-[cite_start]{ text: "Op die man af/reguit is", value: "D" }, [cite: 359]
-[cite_start]{ text: "Té tegemoetkomend/inskiklik is", value: "S" }, [cite: 360]
-[cite_start]{ text: "Mense beïnvloed met my entoesiasme", value: "I" } [cite: 361]
+{ text: "Kieskeurig, puntenerig is", value: "C" },
+{ text: "Op die man af/reguit is", value: "D" },
+{ text: "Té tegemoetkomend/inskiklik is", value: "S" },
+{ text: "Mense beïnvloed met my entoesiasme", value: "I" }
 ]
 },
 {
-[cite_start]questionText: "In my hantering van mense is ek:", [cite: 365]
+questionText: "In my hantering van mense is ek:",
 options: [
-[cite_start]{ text: "Onpartydig, onbevooroordeeld", value: "C" }, [cite: 367]
-[cite_start]{ text: "Simpatiek, vol medelye", value: "S" }, [cite: 368]
-[cite_start]{ text: "Gesagvol, sterk", value: "D" }, [cite: 369]
-[cite_start]{ text: "Joviaal, hartlik", value: "I" } [cite: 370]
+{ text: "Onpartydig, onbevooroordeeld", value: "C" },
+{ text: "Simpatiek, vol medelye", value: "S" },
+{ text: "Gesagvol, sterk", value: "D" },
+{ text: "Joviaal, hartlik", value: "I" }
 ]
 },
 {
-[cite_start]questionText: "Een van my eienskappe waarop mense kan peiltrek, is die feit dat ek:", [cite: 374]
+questionText: "Een van my eienskappe waarop mense kan peiltrek, is die feit dat ek:",
 options: [
-[cite_start]{ text: "Ander kan oortuig/opgewonde maak", value: "I" }, [cite: 376]
-[cite_start]{ text: "Noukeurig, presies is", value: "C" }, [cite: 377]
-[cite_start]{ text: "Gelykmatig en bedaard is", value: "S" }, [cite: 378]
-[cite_start]{ text: "Aanhoudend is, vasbyt", value: "D" } [cite: 379]
+{ text: "Ander kan oortuig/opgewonde maak", value: "I" },
+{ text: "Noukeurig, presies is", value: "C" },
+{ text: "Gelykmatig en bedaard is", value: "S" },
+{ text: "Aanhoudend is, vasbyt", value: "D" }
 ]
 }
 ];
 const questionsContainer = document.getElementById('questions-container');
 const form = document.getElementById('disc-form');
 const formError = document.getElementById('form-error');
-let myChartInstance = null; // Changed from myChart to myChartInstance
+const resultsText = document.getElementById('results-text'); // New element for text results
 
 function generateQuestions() {
 questions.forEach((q, index) => {
@@ -440,104 +443,51 @@ scores[discType] += scoring[rank];
 }
 
 displayResults(scores);
+sendEmailWithResults(scores); // Call email function directly here
 }
 
 function displayResults(scores) {
-[cite_start]const resultsContainer = document.getElementById('results-container'); [cite: 140]
-[cite_start]resultsContainer.classList.remove('hidden'); [cite: 138]
+const resultsContainer = document.getElementById('results-container');
+resultsContainer.classList.remove('hidden');
 
-[cite_start]const ctx = document.getElementById('results-chart').getContext('2d'); [cite: 194]
+resultsText.innerHTML = `
+<p><strong>Dominance (D):</strong> ${scores.D}</p>
+<p><strong>Influence (I):</strong> ${scores.I}</p>
+<p><strong>Steadiness (S):</strong> ${scores.S}</p>
+<p><strong>Conscientiousness (C):</strong> ${scores.C}</p>
+`;
 
-[cite_start]// Destroy the previous chart instance if it exists [cite: 453]
-if(myChartInstance) {
-myChartInstance.destroy(); [cite_start]// [cite: 454]
-myChartInstance = null; // Crucial: Set to null after destroying to prevent "Canvas is already in use" errors
+resultsContainer.scrollIntoView({ behavior: 'smooth' });
 }
 
-[cite_start]myChartInstance = new Chart(ctx, { // [cite: 456]
-[cite_start]type: 'bar', [cite: 457]
-data: {
-[cite_start]labels: ['Dominance (D)', 'Influence (I)', 'Steadiness (S)', 'Conscientiousness (C)'], [cite: 459, 460]
-datasets: [{
-[cite_start]label: 'DiSC Telling', [cite: 461]
-[cite_start]data: [scores.D, scores.I, scores.S, scores.C], [cite: 462]
-backgroundColor: [
-[cite_start]'rgba(217, 83, 79, 0.7)', // Rooi vir D [cite: 464]
-[cite_start]'rgba(240, 173, 78, 0.7)', // Geel vir I [cite: 465]
-[cite_start]'rgba(92, 184, 92, 0.7)', // Groen vir S [cite: 466]
-[cite_start]'rgba(66, 139, 202, 0.7)' // Blou vir C [cite: 467]
-],
-borderColor: [
-[cite_start]'rgba(217, 83, 79, 1)', [cite: 470]
-[cite_start]'rgba(240, 173, 78, 1)', [cite: 471]
-[cite_start]'rgba(92, 184, 92, 1)', [cite: 472]
-[cite_start]'rgba(66, 139, 202, 1)' [cite: 473]
-],
-[cite_start]borderWidth: 1 [cite: 475]
-}]
-},
-options: {
-scales: {
-y: {
-[cite_start]beginAtZero: true, [cite: 481]
-title: {
-[cite_start]display: true, [cite: 483]
-[cite_start]text: 'Telling' [cite: 484]
-}
-}
-},
-[cite_start]responsive: true, [cite: 488]
-[cite_start]maintainAspectRatio: false, [cite: 489]
-plugins: {
-legend: {
-[cite_start]display: false [cite: 492]
-},
-title: {
-[cite_start]display: true, [cite: 495]
-[cite_start]text: 'Jou DiSC Profiel Resultate', [cite: 496]
-font: {
-[cite_start]size: 18 [cite: 498]
-}
-}
-},
-animation: {
-onComplete: () => {
-[cite_start]// Use myChartInstance here [cite: 504]
-const chartImage = myChartInstance.toBase64Image();
-sendEmailWithResults(scores, chartImage);
-}
-}
-}
-});
-[cite_start]resultsContainer.scrollIntoView({ behavior: 'smooth' }); [cite: 510]
-}
-function sendEmailWithResults(scores, chartImage) {
-[cite_start]const emailStatus = document.getElementById('email-status'); [cite: 145]
-[cite_start]emailStatus.textContent = "Stuur tans resultate per e-pos..."; [cite: 514]
-[cite_start]emailStatus.className = ''; [cite: 515]
+function sendEmailWithResults(scores) {
+const emailStatus = document.getElementById('email-status');
+emailStatus.textContent = "Stuur tans resultate per e-pos...";
+emailStatus.className = '';
 
 const templateParams = {
-[cite_start]name: document.getElementById('userName').value, [cite: 517]
-[cite_start]d_score: scores.D, [cite: 518]
-[cite_start]i_score: scores.I, [cite: 519]
-[cite_start]s_score: scores.S, [cite: 520]
-[cite_start]c_score: scores.C, [cite: 521]
-[cite_start]chart_image: chartImage [cite: 522]
+name: document.getElementById('userName').value,
+d_score: scores.D,
+i_score: scores.I,
+s_score: scores.S,
+c_score: scores.C
+// chart_image is removed
 };
 
-[cite_start]emailjs.send('service_cv71ym3', 'template_j1u5nyo', templateParams) [cite: 524]
+emailjs.send('service_cv71ym3', 'template_j1u5nyo', templateParams)
 .then(function(response) {
-[cite_start]console.log('SUCCESS!', response.status, response.text); [cite: 526]
-emailStatus.textContent = 'Sukses! [cite_start]Die resultate is suksesvol per e-pos gestuur.'; [cite: 527]
-[cite_start]emailStatus.classList.add('email-success'); [cite: 528]
+console.log('SUCCESS!', response.status, response.text);
+emailStatus.textContent = 'Sukses! Die resultate is suksesvol per e-pos gestuur.';
+emailStatus.classList.add('email-success');
 }, function(error) {
-[cite_start]console.log('FAILED...', error); [cite: 530]
-emailStatus.textContent = 'Fout: Kon nie die e-pos stuur nie. [cite_start]Gaan asseblief die EmailJS konfigurasie na en probeer weer.'; [cite: 531]
-[cite_start]emailStatus.classList.add('email-error'); [cite: 532]
+console.log('FAILED...', error);
+emailStatus.textContent = 'Fout: Kon nie die e-pos stuur nie. Gaan asseblief die EmailJS konfigurasie na en probeer weer.';
+emailStatus.classList.add('email-error');
 });
 }
-[cite_start]generateQuestions(); [cite: 535]
-[cite_start]form.addEventListener('submit', calculateAndShowResults); [cite: 536]
+
+generateQuestions();
+form.addEventListener('submit', calculateAndShowResults);
 });
 </script>
 </body>
