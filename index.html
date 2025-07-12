@@ -4,1372 +4,1348 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DiSC Analise Vraelys</title>
-	<meta property="og:title" content="DISC Analise Vorm" />
-	<meta property="og:description" content="Vul hierdie DISC vorm in as deel van jou persoonlike profiel en berading." />
-	<meta property="og:image" content="https://i.imgur.com/G6NIgq3.jpg" />
-	<meta property="og:url" content="https://qgroenewald-disk.github.io/Disk-Analise-Vorm/" />
-	<meta name="twitter:card" content="summary_large_image" />
-	<style>
+    <meta property="og:title" content="DISC Analise Vorm" />
+    <meta property="og:description" content="Vul hierdie DISC vorm in as deel van jou persoonlike profiel en berading." />
+    <meta property="og:image" content="https://i.imgur.com/G6NIgq3.jpg" />
+    <meta property="og:url" content="https://qgroenewald-disk.github.io/Disk-Analise-Vorm/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <style>
+        /* Algemene styl */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
-
         .container {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 20px auto;
             background: white;
             border-radius: 15px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            color: white;
             padding: 30px;
+            position: relative;
+        }
+        h1 {
+            color: #333;
             text-align: center;
-	    position: relative;
+            margin-bottom: 30px;
+            font-size: 2.2em;
         }
-
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .header p {
-            font-size: 1.1em;
-            opacity: 0.9;
-        }
-
-        .form-container {
-            padding: 30px;
-        }
-
-        .question-group {
-            margin-bottom: 40px;
-            padding: 25px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border-left: 5px solid #4facfe;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-
-        .question-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #2c3e50;
+        h2 {
+            color: #555;
+            margin-top: 40px;
             margin-bottom: 20px;
-            line-height: 1.4;
+            font-size: 1.6em;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
         }
-
-        .option-container {
-            display: grid;
-            gap: 15px;
+        p {
             margin-bottom: 15px;
+            line-height: 1.8;
+            color: #666;
         }
-
-        .option-item {
+        .question-group {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            border: 1px solid #eee;
+        }
+        .question-group strong {
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            color: #333;
+        }
+        .question-row {
             display: flex;
             align-items: center;
-            padding: 15px;
-            background: white;
-            border-radius: 8px;
-            border: 2px solid #e0e0e0;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-
-        .option-item:hover {
-            border-color: #4facfe;
-            box-shadow: 0 3px 10px rgba(79, 172, 254, 0.2);
+        .question-row label {
+            flex: 1;
+            min-width: 150px;
+            color: #444;
         }
-
-        .option-item.selected {
-            border-color: #4facfe;
-            background: #f0f8ff;
-        }
-
-        .option-label {
-            flex-grow: 1;
-            font-size: 1.1em;
-            color: #34495e;
-            margin-left: 10px;
-        }
-
-        .rank-select {
-            width: 80px;
-            padding: 8px;
-            border: 2px solid #ddd;
+        .question-row select {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 1em;
-            background: white;
-            color: #2c3e50;
-        }
-
-        .rank-select:focus {
-            outline: none;
-            border-color: #4facfe;
-        }
-	.text-input { /* New style for text input */
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 1.1em;
-            color: #2c3e50;
-            box-sizing: border-box; /* Ensure padding doesn't add to width */
-        }
-
-        .text-input:focus {
-            outline: none;
-            border-color: #4facfe;
-            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.2);
-        }
-
-        .error-message {
-            color: #e74c3c;
+            background-color: #fff;
             font-size: 0.9em;
-            margin-top: 10px;
-            padding: 10px;
-            background: #fdf2f2;
-            border-radius: 5px;
-            border-left: 4px solid #e74c3c;
+            cursor: pointer;
+            flex: 0 0 auto;
+        }
+        .question-row select:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+        .error-message {
+            color: #d9534f;
+            font-size: 0.85em;
+            margin-top: 5px;
             display: none;
         }
-
-        .submit-container {
+        .form-actions {
             text-align: center;
             margin-top: 40px;
-            padding: 30px;
-            background: #f8f9fa;
-            border-radius: 10px;
         }
-
-        .submit-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        button[type="submit"] {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             color: white;
-            padding: 15px 40px;
-            font-size: 1.2em;
-            font-weight: bold;
+            padding: 15px 30px;
             border: none;
-            border-radius: 50px;
+            border-radius: 8px;
+            font-size: 1.2em;
             cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            transition: background 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-
-        .submit-btn:hover {
+        button[type="submit"]:hover {
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+        button[type="submit"]:active {
+            transform: translateY(0);
         }
 
-        .submit-btn:disabled {
-            background: #bdc3c7;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #ecf0f1;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .results-container {
-            display: none;
-            padding: 30px;
-            background: #f8f9fa;
+        /* Resultate Afdeling Styl */
+        #results {
+            margin-top: 40px;
+            padding: 25px;
+            background-color: #eaf6ff;
             border-radius: 10px;
-            margin-top: 20px;
+            border: 1px solid #cceeff;
+            display: none; /* Versteek aanvanklik */
         }
-
-        .chart-container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .chart-title {
+        #results h2 {
+            color: #2a6496;
             text-align: center;
-            font-size: 1.5em;
-            color: #2c3e50;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            border-bottom: none;
+            font-size: 1.8em;
         }
-
+        .chart-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
         .chart-bar {
-            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
         }
-
         .chart-label {
+            flex-basis: 120px;
             font-weight: bold;
-            color: #34495e;
-            margin-bottom: 5px;
+            color: #333;
+            text-align: right;
+            padding-right: 15px;
         }
-
-        .bar-container {
-            background: #ecf0f1;
+        .bar-visual {
+            flex-grow: 1;
             height: 30px;
-            border-radius: 15px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
             overflow: hidden;
             position: relative;
         }
-
         .bar-fill {
             height: 100%;
-            border-radius: 15px;
+            border-radius: 5px;
+            transition: width 0.5s ease-out;
             display: flex;
             align-items: center;
             justify-content: flex-end;
             padding-right: 10px;
             color: white;
             font-weight: bold;
-            transition: width 0.8s ease;
+            font-size: 0.9em;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .bar-d { background-color: #f75c03; } /* Oranje */
+        .bar-i { background-color: #03a9f4; } /* Blou */
+        .bar-s { background-color: #8bc34a; } /* Groen */
+        .bar-c { background-color: #9c27b0; } /* Pers */
+
+        .score-display {
+            width: 50px;
+            text-align: right;
+            font-weight: bold;
+            color: #333;
+            padding-left: 10px;
         }
 
-        .bar-d { background: linear-gradient(90deg, #ff6b6b, #ff8e8e); }
-        .bar-i { background: linear-gradient(90deg, #4ecdc4, #44a08d); }
-        .bar-s { background: linear-gradient(90deg, #45b7d1, #96deda); }
-        .bar-c { background: linear-gradient(90deg, #f093fb, #f5576c); }
-	.logo {
-        position: absolute;
-        top: 20px;
-        left: 50px;
-        height: 50px; /* pas aan soos jy wil */
-        z-index: 1000; /* sodat dit bo-op ander elemente bly */
-	border-radius: 8px;
-	}
-
-	@media (max-width: 600px) {
-    		.logo {
-        	height: 30px;
-        	top: 5px;
-        	left: 5px;
-			}
-    
-    .header {
-        padding-top: 40px; /* Adds space so title isn't pushed */
-    }
-}
+        /* E-pos Status Boodskap */
+        #emailStatus {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: bold;
+        }
     </style>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-</head>
+    </head>
 <body>
     <div class="container">
-        <div class="header">
-	<img src="https://i.imgur.com/G6NIgq3.jpg" alt="Logo" class="logo">
-            <h1>DiSC Analise Vraelys</h1>
-            <p>Rangskik elke antwoord van 1 (stem die meeste saam) tot 4 (stem die minste saam)</p>
-        </div>
+        <h1>DiSC Analise Vraelys</h1>
+        <p>Voltooi asseblief die volgende vrae deur elke opsie van '1' (Meeste Soos Ek) tot '4' (Minste Soos Ek) te rangskik. Elke rang moet net een keer per vraag gebruik word.</p>
 
-        <div class="form-container">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
+        <form id="discForm">
+            <div class="form-group">
+                <label for="userName"><strong>Jou Naam:</strong></label>
+                <input type="text" id="userName" name="userName" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-top: 5px; font-size: 1em;">
             </div>
 
-           <form id="discForm">
-		<div class="question-group">
-                    <div class="question-title">Jou Naam:</div>
-                    <div class="option-container">
-                        <input type="text" id="userName" name="user_name" class="text-input" placeholder="Voer jou naam hier in" required>
-                    </div>
-                    <div class="error-message" id="error_userName" style="display: none;">Asseblief, voer jou naam in.</div>
+            <div class="question-group">
+                <strong>Vraag 1:</strong>
+                <div class="question-row">
+                    <label for="q1_1">Vasberade</label>
+                    <select name="q1_1" id="q1_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="C">2</option>
+                        <option value="S">3</option>
+                        <option value="I">4</option>
+                    </select>
                 </div>
-
-                <div class="question-group">
-                    <div class="question-title">1. 'n Mens sou die manier waarop ek in my verhoudings met ander mense optree, kon beskryf as:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Oorspronklik, vol planne</span>
-                            <select class="rank-select" name="q1_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Saggeaard, goedhartig</span>
-                            <select class="rank-select" name="q1_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Oordeelkundig, versigtig</span>
-                            <select class="rank-select" name="q1_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Beslis, selfgeldend</span>
-                            <select class="rank-select" name="q1_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q1">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+                <div class="question-row">
+                    <label for="q1_2">Oortuigend</label>
+                    <select name="q1_2" id="q1_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="S">2</option>
+                        <option value="D">3</option>
+                        <option value="C">4</option>
+                    </select>
                 </div>
-
-                <div class="question-group">
-                    <div class="question-title">2. Vir soverre dit die dinge betref wat die lewe oor my pad bring, is ek:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Ondernemend, benut geleenthede</span>
-                            <select class="rank-select" name="q2_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Nugter, speel veilig</span>
-                            <select class="rank-select" name="q2_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Sorgvry, opgewek</span>
-                            <select class="rank-select" name="q2_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Gelykmatig, geduldig</span>
-                            <select class="rank-select" name="q2_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q2">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+                <div class="question-row">
+                    <label for="q1_3">Analities</label>
+                    <select name="q1_3" id="q1_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="S">4</option>
+                    </select>
                 </div>
-
-                <div class="question-group">
-                    <div class="question-title">3. In my samewerking met ander mense sal ek normaalweg as volg optree:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Onderhandelend, diplomaties</span>
-                            <select class="rank-select" name="q3_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Mededingend, kompeterend</span>
-                            <select class="rank-select" name="q3_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Bedagsaam, sensitief vir ander</span>
-                            <select class="rank-select" name="q3_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Stimulerend, aktiverend</span>
-                            <select class="rank-select" name="q3_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q3">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+                <div class="question-row">
+                    <label for="q1_4">Kalm</label>
+                    <select name="q1_4" id="q1_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="I">2</option>
+                        <option value="C">3</option>
+                        <option value="D">4</option>
+                    </select>
                 </div>
+                <div class="error-message" id="error_q1"></div>
+            </div>
 
-                <div class="question-group">
-                    <div class="question-title">4. Wanneer ek oor my lewe dink beleef ek myself as:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Vergenoegd, tevrede</span>
-                            <select class="rank-select" name="q4_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Op pad na duidelike doelwitte</span>
-                            <select class="rank-select" name="q4_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Kreatief, vol nuwe idees</span>
-                            <select class="rank-select" name="q4_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Deeglik, georganiseerd</span>
-                            <select class="rank-select" name="q4_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q4">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+            <div class="question-group">
+                <strong>Vraag 2:</strong>
+                <div class="question-row">
+                    <label for="q2_1">Avontuurlik</label>
+                    <select name="q2_1" id="q2_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="S">2</option>
+                        <option value="C">3</option>
+                        <option value="I">4</option>
+                    </select>
                 </div>
-
-                <div class="question-group">
-                    <div class="question-title">5. Ek sal myself beskryf as:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Doelgerig, vasberade</span>
-                            <select class="rank-select" name="q5_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Akkuraat, presies</span>
-                            <select class="rank-select" name="q5_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Kalm, vredeliewend</span>
-                            <select class="rank-select" name="q5_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Vol lewenslus, prettig</span>
-                            <select class="rank-select" name="q5_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q5">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+                <div class="question-row">
+                    <label for="q2_2">Lighartig</label>
+                    <select name="q2_2" id="q2_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="C">2</option>
+                        <option value="D">3</option>
+                        <option value="S">4</option>
+                    </select>
                 </div>
-
-                <div class="question-group">
-                    <div class="question-title">In my sosiale omgang met ander mense sal ek:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">6. Ander betrek en laat meedoen</span>
-                            <select class="rank-select" name="q6_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Konfronterend wees, argumenteer</span>
-                            <select class="rank-select" name="q6_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Inskiklik, onderdanig wees</span>
-                            <select class="rank-select" name="q6_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Gereserveerd, beheers wees</span>
-                            <select class="rank-select" name="q6_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q6">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+                <div class="question-row">
+                    <label for="q2_3">Noukeurig</label>
+                    <select name="q2_3" id="q2_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="D">4</option>
+                    </select>
                 </div>
-
-                <div class="question-group">
-                    <div class="question-title">7. Die styl van menswees wat ek uitstraal, kan beskryf word as:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Goedgeaard, aangenaam</span>
-                            <select class="rank-select" name="q7_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Uitgelate, opgeruimd</span>
-                            <select class="rank-select" name="q7_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Energiek, entoesiasties</span>
-                            <select class="rank-select" name="q7_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Gedissiplineerd, gestruktureerd</span>
-                            <select class="rank-select" name="q7_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q7">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+                <div class="question-row">
+                    <label for="q2_4">Aanpasbaar</label>
+                    <select name="q2_4" id="q2_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="C">4</option>
+                    </select>
                 </div>
+                <div class="error-message" id="error_q2"></div>
+            </div>
 
-                <div class="question-group">
-                    <div class="question-title">8. In my kommunikasie met ander mense is ek:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Uitgesproke/stel eie standpunt duidelik</span>
-                            <select class="rank-select" name="q8_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Entoesiasties, positief</span>
-                            <select class="rank-select" name="q8_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Oop vir oortuiging, tentatief</span>
-                            <select class="rank-select" name="q8_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Logies, beredeneerd</span>
-                            <select class="rank-select" name="q8_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q8">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+            <div class="question-group">
+                <strong>Vraag 3:</strong>
+                <div class="question-row">
+                    <label for="q3_1">Direk</label>
+                    <select name="q3_1" id="q3_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="S">2</option>
+                        <option value="C">3</option>
+                        <option value="I">4</option>
+                    </select>
                 </div>
-
-                <div class="question-group">
-                    <div class="question-title">9. Wanneer dit by besluiteneming kom, sal ek myself beskryf as:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Gekontroleerd, deurdag</span>
-                            <select class="rank-select" name="q9_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Beslis, ferm</span>
-                            <select class="rank-select" name="q9_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Impulsief, spontaan</span>
-                            <select class="rank-select" name="q9_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Tegemoetkomend, aanpasbaar</span>
-                            <select class="rank-select" name="q9_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q9">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+                <div class="question-row">
+                    <label for="q3_2">Vriendelik</label>
+                    <select name="q3_2" id="q3_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="C">2</option>
+                        <option value="D">3</option>
+                        <option value="S">4</option>
+                    </select>
                 </div>
-
-                <div class="question-group">
-                    <div class="question-title">10. Ek sien en beleef myself as 'n persoon wat:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Ondernemend is, uitdagings soek</span>
-                            <select class="rank-select" name="q10_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Oordeelkundig is (kan onderskei)</span>
-                            <select class="rank-select" name="q10_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Uitgaande is, uitreik na ander</span>
-                            <select class="rank-select" name="q10_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Gematigd is, uiterstes vermy</span>
-                            <select class="rank-select" name="q10_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q10">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+                <div class="question-row">
+                    <label for="q3_3">Presies</label>
+                    <select name="q3_3" id="q3_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="D">4</option>
+                    </select>
                 </div>
-
-                <div class="question-group">
-                    <div class="question-title">11. Ek dink aan myself as 'n persoon wat:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Ekspressief, eerlik oor my gevoelens is</span>
-                            <select class="rank-select" name="q11_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Opreg is, doen wat reg is</span>
-                            <select class="rank-select" name="q11_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Toonaangewend, in beheer is</span>
-                            <select class="rank-select" name="q11_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Deelnemend, samewerkend is</span>
-                            <select class="rank-select" name="q11_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q11">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+                <div class="question-row">
+                    <label for="q3_4">Geduldig</label>
+                    <select name="q3_4" id="q3_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="C">4</option>
+                    </select>
                 </div>
+                <div class="error-message" id="error_q3"></div>
+            </div>
 
-                <div class="question-group">
-                    <div class="question-title">12. Ek is:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Uitgaande, ingestel op ander</span>
-                            <select class="rank-select" name="q12_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Pligsgetrou, hou by afsprake</span>
-                            <select class="rank-select" name="q12_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Spanspeler, werk saam</span>
-                            <select class="rank-select" name="q12_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Doelgerig, weet wat ek wil hê</span>
-                            <select class="rank-select" name="q12_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q12">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+            <div class="question-group">
+                <strong>Vraag 4:</strong>
+                <div class="question-row">
+                    <label for="q4_1">Druk-gedrewe</label>
+                    <select name="q4_1" id="q4_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="C">4</option>
+                    </select>
                 </div>
-
-                <div class="question-group">
-                    <div class="question-title">13. Ek doen dinge gewoonlik:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Bepland, takties</span>
-                            <select class="rank-select" name="q13_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Gelate, gee maklik toe</span>
-                            <select class="rank-select" name="q13_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Opgeruimd, blymoedig</span>
-                            <select class="rank-select" name="q13_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Ferm en met oortuiging</span>
-                            <select class="rank-select" name="q13_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q13">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+                <div class="question-row">
+                    <label for="q4_2">Gesellig</label>
+                    <select name="q4_2" id="q4_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="S">2</option>
+                        <option value="D">3</option>
+                        <option value="C">4</option>
+                    </select>
                 </div>
-
-                <div class="question-group">
-                    <div class="question-title">14. Ek sal my geaardheid beskryf as:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Innemend (trek ander aan)</span>
-                            <select class="rank-select" name="q14_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Selfondersoekend, introspektief</span>
-                            <select class="rank-select" name="q14_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Selfversekerd, invloedryk</span>
-                            <select class="rank-select" name="q14_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Standvastig, voorspelbaar</span>
-                            <select class="rank-select" name="q14_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q14">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+                <div class="question-row">
+                    <label for="q4_3">Feitlik</label>
+                    <select name="q4_3" id="q4_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="S">4</option>
+                    </select>
                 </div>
-
-                <div class="question-group">
-                    <div class="question-title">15. My lewensbenadering kan beskryf word met:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Verantwoordelik, pligsgetrou</span>
-                            <select class="rank-select" name="q15_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Ondernemend, skeppend</span>
-                            <select class="rank-select" name="q15_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Optimisties, positief</span>
-                            <select class="rank-select" name="q15_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Deeglik, georganiseerd</span>
-                            <select class="rank-select" name="q15_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q15">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+                <div class="question-row">
+                    <label for="q4_4">Kalm</label>
+                    <select name="q4_4" id="q4_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="I">2</option>
+                        <option value="C">3</option>
+                        <option value="D">4</option>
+                    </select>
                 </div>
+                <div class="error-message" id="error_q4"></div>
+            </div>
 
-                <div class="question-group">
-                    <div class="question-title">16. As ek oor myself dink in verhouding met andere, sien ek myself as:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Selfstandig, onafhanklik</span>
-                            <select class="rank-select" name="q16_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Erkentlik, eerbiedig</span>
-                            <select class="rank-select" name="q16_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Hulpvaardig, ondersteunend</span>
-                            <select class="rank-select" name="q16_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Inspirerend, motiverend</span>
-                            <select class="rank-select" name="q16_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q16">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+            <div class="question-group">
+                <strong>Vraag 5:</strong>
+                <div class="question-row">
+                    <label for="q5_1">Besluitnemer</label>
+                    <select name="q5_1" id="q5_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="S">2</option>
+                        <option value="C">3</option>
+                        <option value="I">4</option>
+                    </select>
                 </div>
-
-                <div class="question-group">
-                    <div class="question-title">17. Een van my eienskappe waaroor ek goed voel is, is die feit dat ek:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Aanhoudend is, nie maklik opgee nie</span>
-                            <select class="rank-select" name="q17_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Lojaal/toegewyd teenoor ander is</span>
-                            <select class="rank-select" name="q17_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Opgewek is; van lekker dinge hou</span>
-                            <select class="rank-select" name="q17_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Konsensieus, pligsgetrou is</span>
-                            <select class="rank-select" name="q17_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q17">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+                <div class="question-row">
+                    <label for="q5_2">Oopkop</label>
+                    <select name="q5_2" id="q5_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="C">2</option>
+                        <option value="D">3</option>
+                        <option value="S">4</option>
+                    </select>
                 </div>
-
-                <div class="question-group">
-                    <div class="question-title">18. Een eienskap van my wat nie altyd so positief deur ander ontvang word nie, is die feit dat ek soms:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Kieskeurig, puntenerig is</span>
-                            <select class="rank-select" name="q18_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Op die man af/reguit is</span>
-                            <select class="rank-select" name="q18_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Té tegemoetkomend/inskiklik is</span>
-                            <select class="rank-select" name="q18_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Mense beïnvloed met my entoesiasme</span>
-                            <select class="rank-select" name="q18_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q18">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+                <div class="question-row">
+                    <label for="q5_3">Behoedsaam</label>
+                    <select name="q5_3" id="q5_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="D">4</option>
+                    </select>
                 </div>
-
-                <div class="question-group">
-                    <div class="question-title">19. In my hantering van mense is ek:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Onpartydig, onbevooroordeeld</span>
-                            <select class="rank-select" name="q19_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Simpatiek, vol medelye</span>
-                            <select class="rank-select" name="q19_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Gesagvol, sterk</span>
-                            <select class="rank-select" name="q19_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Joviaal, hartlik</span>
-                            <select class="rank-select" name="q19_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q19">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+                <div class="question-row">
+                    <label for="q5_4">Betroubaar</label>
+                    <select name="q5_4" id="q5_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="C">4</option>
+                    </select>
                 </div>
+                <div class="error-message" id="error_q5"></div>
+            </div>
 
-                <div class="question-group">
-                    <div class="question-title">20. Een van my eienskappe waarop mense kan peiltrek, is die feit dat ek:</div>
-                    <div class="option-container">
-                        <div class="option-item">
-                            <span class="option-label">Ander kan oortuig/opgewonde maak</span>
-                            <select class="rank-select" name="q20_i" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Noukeurig, presies is</span>
-                            <select class="rank-select" name="q20_c" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Gelykmatig en bedaard is</span>
-                            <select class="rank-select" name="q20_s" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                        <div class="option-item">
-                            <span class="option-label">Aanhoudend is, vasbyt</span>
-                            <select class="rank-select" name="q20_d" required> <option value="">Kies</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="error-message" id="error_q20">Let wel: Elke rangorde (1-4) mag slegs een keer gebruik word.</div>
+            <div class="question-group">
+                <strong>Vraag 6:</strong>
+                <div class="question-row">
+                    <label for="q6_1">Onafhanklik</label>
+                    <select name="q6_1" id="q6_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="C">4</option>
+                    </select>
                 </div>
-
-                <div class="submit-container">
-                    <button type="submit" class="submit-btn" id="submitBtn">Voltooi Analise</button>
+                <div class="question-row">
+                    <label for="q6_2">Optimisties</label>
+                    <select name="q6_2" id="q6_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="S">2</option>
+                        <option value="D">3</option>
+                        <option value="C">4</option>
+                    </select>
                 </div>
-            </form>
+                <div class="question-row">
+                    <label for="q6_3">Sorgvuldig</label>
+                    <select name="q6_3" id="q6_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="S">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q6_4">Lojal</label>
+                    <select name="q6_4" id="q6_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="I">2</option>
+                        <option value="C">3</option>
+                        <option value="D">4</option>
+                    </select>
+                </div>
+                <div class="error-message" id="error_q6"></div>
+            </div>
 
-            <div class="results-container" id="resultsContainer">
-                <div class="chart-container">
-                    <div class="chart-title">DiSC Analise Resultate</div>
-                    <div class="chart-bar">
-                        <div class="chart-label">D (Dominant): <span id="dScore">0</span></div>
-                        <div class="bar-container">
-                            <div class="bar-fill bar-d" id="dBar">0%</div>
-                        </div>
+            <div class="question-group">
+                <strong>Vraag 7:</strong>
+                <div class="question-row">
+                    <label for="q7_1">Uitdagend</label>
+                    <select name="q7_1" id="q7_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="S">2</option>
+                        <option value="C">3</option>
+                        <option value="I">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q7_2">Spontaan</label>
+                    <select name="q7_2" id="q7_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="C">2</option>
+                        <option value="D">3</option>
+                        <option value="S">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q7_3">Logies</label>
+                    <select name="q7_3" id="q7_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="D">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q7_4">Stabiel</label>
+                    <select name="q7_4" id="q7_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="error-message" id="error_q7"></div>
+            </div>
+
+            <div class="question-group">
+                <strong>Vraag 8:</strong>
+                <div class="question-row">
+                    <label for="q8_1">Doelgerig</label>
+                    <select name="q8_1" id="q8_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q8_2">Entoesiasties</label>
+                    <select name="q8_2" id="q8_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="S">2</option>
+                        <option value="D">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q8_3">Detail-georiënteerd</label>
+                    <select name="q8_3" id="q8_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="S">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q8_4">Rustig</label>
+                    <select name="q8_4" id="q8_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="I">2</option>
+                        <option value="C">3</option>
+                        <option value="D">4</option>
+                    </select>
+                </div>
+                <div class="error-message" id="error_q8"></div>
+            </div>
+
+            <div class="question-group">
+                <strong>Vraag 9:</strong>
+                <div class="question-row">
+                    <label for="q9_1">Uitvoerder</label>
+                    <select name="q9_1" id="q9_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="S">2</option>
+                        <option value="C">3</option>
+                        <option value="I">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q9_2">Charismaties</label>
+                    <select name="q9_2" id="q9_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="C">2</option>
+                        <option value="D">3</option>
+                        <option value="S">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q9_3">Akkuraat</label>
+                    <select name="q9_3" id="q9_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="D">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q9_4">Gelykmoedig</label>
+                    <select name="q9_4" id="q9_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="error-message" id="error_q9"></div>
+            </div>
+
+            <div class="question-group">
+                <strong>Vraag 10:</strong>
+                <div class="question-row">
+                    <label for="q10_1">Mededingend</label>
+                    <select name="q10_1" id="q10_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q10_2">Vrolik</label>
+                    <select name="q10_2" id="q10_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="S">2</option>
+                        <option value="D">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q10_3">Stelselmatig</label>
+                    <select name="q10_3" id="q10_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="S">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q10_4">Gelykmoedig</label>
+                    <select name="q10_4" id="q10_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="I">2</option>
+                        <option value="C">3</option>
+                        <option value="D">4</option>
+                    </select>
+                </div>
+                <div class="error-message" id="error_q10"></div>
+            </div>
+
+            <div class="question-group">
+                <strong>Vraag 11:</strong>
+                <div class="question-row">
+                    <label for="q11_1">Snel</label>
+                    <select name="q11_1" id="q11_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="S">2</option>
+                        <option value="C">3</option>
+                        <option value="I">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q11_2">Ekspressief</label>
+                    <select name="q11_2" id="q11_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="C">2</option>
+                        <option value="D">3</option>
+                        <option value="S">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q11_3">Kritiek</label>
+                    <select name="q11_3" id="q11_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="D">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q11_4">Gedissiplineerd</label>
+                    <select name="q11_4" id="q11_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="error-message" id="error_q11"></div>
+            </div>
+
+            <div class="question-group">
+                <strong>Vraag 12:</strong>
+                <div class="question-row">
+                    <label for="q12_1">Verantwoordelik</label>
+                    <select name="q12_1" id="q12_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q12_2">Oorspronklik</label>
+                    <select name="q12_2" id="q12_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="S">2</option>
+                        <option value="D">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q12_3">Oorwoë</label>
+                    <select name="q12_3" id="q12_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="S">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q12_4">Liefdevol</label>
+                    <select name="q12_4" id="q12_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="I">2</option>
+                        <option value="C">3</option>
+                        <option value="D">4</option>
+                    </select>
+                </div>
+                <div class="error-message" id="error_q12"></div>
+            </div>
+
+            <div class="question-group">
+                <strong>Vraag 13:</strong>
+                <div class="question-row">
+                    <label for="q13_1">Reserwering</label>
+                    <select name="q13_1" id="q13_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">4</option> <option value="C">1</option>
+                        <option value="S">2</option>
+                        <option value="I">3</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q13_2">Leier</label>
+                    <select name="q13_2" id="q13_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">3</option> <option value="S">4</option>
+                        <option value="D">1</option>
+                        <option value="C">2</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q13_3">Organiseerder</label>
+                    <select name="q13_3" id="q13_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="S">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q13_4">Passief</label>
+                    <select name="q13_4" id="q13_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="I">2</option>
+                        <option value="C">3</option>
+                        <option value="D">4</option>
+                    </select>
+                </div>
+                <div class="error-message" id="error_q13"></div>
+            </div>
+
+            <div class="question-group">
+                <strong>Vraag 14:</strong>
+                <div class="question-row">
+                    <label for="q14_1">Pionier</label>
+                    <select name="q14_1" id="q14_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="S">2</option>
+                        <option value="C">3</option>
+                        <option value="I">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q14_2">Inspirerend</label>
+                    <select name="q14_2" id="q14_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="C">2</option>
+                        <option value="D">3</option>
+                        <option value="S">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q14_3">Standardiseerder</label>
+                    <select name="q14_3" id="q14_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="D">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q14_4">Kalmeerder</label>
+                    <select name="q14_4" id="q14_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="error-message" id="error_q14"></div>
+            </div>
+
+            <div class="question-group">
+                <strong>Vraag 15:</strong>
+                <div class="question-row">
+                    <label for="q15_1">Beslissend</label>
+                    <select name="q15_1" id="q15_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q15_2">Ope</label>
+                    <select name="q15_2" id="q15_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="S">2</option>
+                        <option value="D">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q15_3">Beplan</label>
+                    <select name="q15_3" id="q15_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="S">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q15_4">Betroubaar</label>
+                    <select name="q15_4" id="q15_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="I">2</option>
+                        <option value="C">3</option>
+                        <option value="D">4</option>
+                    </select>
+                </div>
+                <div class="error-message" id="error_q15"></div>
+            </div>
+
+            <div class="question-group">
+                <strong>Vraag 16:</strong>
+                <div class="question-row">
+                    <label for="q16_1">Plaasvindend</label>
+                    <select name="q16_1" id="q16_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="S">2</option>
+                        <option value="C">3</option>
+                        <option value="I">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q16_2">Vrolik</label>
+                    <select name="q16_2" id="q16_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="C">2</option>
+                        <option value="D">3</option>
+                        <option value="S">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q16_3">Fokus</label>
+                    <select name="q16_3" id="q16_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="D">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q16_4">Struktuur</label>
+                    <select name="q16_4" id="q16_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="error-message" id="error_q16"></div>
+            </div>
+
+            <div class="question-group">
+                <strong>Vraag 17:</strong>
+                <div class="question-row">
+                    <label for="q17_1">Agressief</label>
+                    <select name="q17_1" id="q17_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q17_2">Leergierig</label>
+                    <select name="q17_2" id="q17_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="S">2</option>
+                        <option value="D">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q17_3">Opgeskote</label>
+                    <select name="q17_3" id="q17_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="S">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q17_4">Gehoorsaam</label>
+                    <select name="q17_4" id="q17_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="I">2</option>
+                        <option value="C">3</option>
+                        <option value="D">4</option>
+                    </select>
+                </div>
+                <div class="error-message" id="error_q17"></div>
+            </div>
+
+            <div class="question-group">
+                <strong>Vraag 18:</strong>
+                <div class="question-row">
+                    <label for="q18_1">Selfversekerd</label>
+                    <select name="q18_1" id="q18_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="S">2</option>
+                        <option value="C">3</option>
+                        <option value="I">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q18_2">Grapmaker</label>
+                    <select name="q18_2" id="q18_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="C">2</option>
+                        <option value="D">3</option>
+                        <option value="S">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q18_3">Perfeeksionisties</label>
+                    <select name="q18_3" id="q18_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="D">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q18_4">Diplomaties</label>
+                    <select name="q18_4" id="q18_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="error-message" id="error_q18"></div>
+            </div>
+
+            <div class="question-group">
+                <strong>Vraag 19:</strong>
+                <div class="question-row">
+                    <label for="q19_1">Kompetent</label>
+                    <select name="q19_1" id="q19_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q19_2">Ondersteunend</label>
+                    <select name="q19_2" id="q19_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="S">2</option>
+                        <option value="D">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q19_3">Versigtig</label>
+                    <select name="q19_3" id="q19_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="S">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q19_4">Harmonieus</label>
+                    <select name="q19_4" id="q19_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="I">2</option>
+                        <option value="C">3</option>
+                        <option value="D">4</option>
+                    </select>
+                </div>
+                <div class="error-message" id="error_q19"></div>
+            </div>
+
+            <div class="question-group">
+                <strong>Vraag 20:</strong>
+                <div class="question-row">
+                    <label for="q20_1">Resultaat-georiënteerd</label>
+                    <select name="q20_1" id="q20_1">
+                        <option value="">Kies rang</option>
+                        <option value="D">1</option>
+                        <option value="S">2</option>
+                        <option value="C">3</option>
+                        <option value="I">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q20_2">Opwindend</label>
+                    <select name="q20_2" id="q20_2">
+                        <option value="">Kies rang</option>
+                        <option value="I">1</option>
+                        <option value="C">2</option>
+                        <option value="D">3</option>
+                        <option value="S">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q20_3">Sensitief</label>
+                    <select name="q20_3" id="q20_3">
+                        <option value="">Kies rang</option>
+                        <option value="C">1</option>
+                        <option value="I">2</option>
+                        <option value="S">3</option>
+                        <option value="D">4</option>
+                    </select>
+                </div>
+                <div class="question-row">
+                    <label for="q20_4">Voorspelbaar</label>
+                    <select name="q20_4" id="q20_4">
+                        <option value="">Kies rang</option>
+                        <option value="S">1</option>
+                        <option value="D">2</option>
+                        <option value="I">3</option>
+                        <option value="C">4</option>
+                    </select>
+                </div>
+                <div class="error-message" id="error_q20"></div>
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit">Dien In</button>
+            </div>
+        </form>
+
+        <div id="emailStatus"></div> <div id="results">
+            <h2>Jou DiSC Resultate</h2>
+            <p>Hier is 'n opsomming van jou DiSC-tellings:</p>
+            <div class="chart-container">
+                <div class="chart-bar">
+                    <span class="chart-label">Dominance (D)</span>
+                    <div class="bar-visual">
+                        <div class="bar-fill bar-d" id="dProgressBar" style="width: 0%;"></div>
                     </div>
-                    <div class="chart-bar">
-                        <div class="chart-label">I (Invloed): <span id="iScore">0</span></div>
-                        <div class="bar-container">
-                            <div class="bar-fill bar-i" id="iBar">0%</div>
-                        </div>
+                    <span class="score-display" id="dScoreDisplay">D: 0</span>
+                </div>
+                <div class="chart-bar">
+                    <span class="chart-label">Influence (I)</span>
+                    <div class="bar-visual">
+                        <div class="bar-fill bar-i" id="iProgressBar" style="width: 0%;"></div>
                     </div>
-                    <div class="chart-bar">
-                        <div class="chart-label">S (Standvastigheid): <span id="sScore">0</span></div>
-                        <div class="bar-container">
-                            <div class="bar-fill bar-s" id="sBar">0%</div>
-                        </div>
+                    <span class="score-display" id="iScoreDisplay">I: 0</span>
+                </div>
+                <div class="chart-bar">
+                    <span class="chart-label">Steadiness (S)</span>
+                    <div class="bar-visual">
+                        <div class="bar-fill bar-s" id="sProgressBar" style="width: 0%;"></div>
                     </div>
-                    <div class="chart-bar">
-                        <div class="chart-label">C (Konformiteit): <span id="cScore">0</span></div>
-                        <div class="bar-container">
-                            <div class="bar-fill bar-c" id="cBar">0%</div>
-                        </div>
+                    <span class="score-display" id="sScoreDisplay">S: 0</span>
+                </div>
+                <div class="chart-bar">
+                    <span class="chart-label">Conscientiousness (C)</span>
+                    <div class="bar-visual">
+                        <div class="bar-fill bar-c" id="cProgressBar" style="width: 0%;"></div>
                     </div>
+                    <span class="score-display" id="cScoreDisplay">C: 0</span>
                 </div>
             </div>
+            <p style="text-align: center; margin-top: 20px; font-style: italic;">Let wel: Hierdie grafieke verteenwoordig jou primêre tendense. 'n Volledige interpretasie sal deur 'n konsultant gegee word.</p>
         </div>
     </div>
 
-    <script>
-        const form = document.getElementById('discForm');
-        const progressFill = document.getElementById('progressFill');
-        const submitBtn = document.getElementById('submitBtn');
-        const resultsContainer = document.getElementById('resultsContainer');
-        const dScoreSpan = document.getElementById('dScore');
-        const iScoreSpan = document.getElementById('iScore');
-        const sScoreSpan = document.getElementById('sScore');
-        const cScoreSpan = document.getElementById('cScore');
-        const dBar = document.getElementById('dBar');
-        const iBar = document.getElementById('iBar');
-        const sBar = document.getElementById('sBar');
-        const cBar = document.getElementById('cBar');
-	const userNameInput = document.getElementById('userName');
-	const userNameError = document.getElementById('error_userName');
-        
-        // Initialize EmailJS (only once, at the top level of the script)
-        emailjs.init('rES387Z_beB0IEiRm');
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // Inisialiseer EmailJS met jou User ID
+        // *** BAIE BELANGRIK: VERVANG "JOU_EMAILJS_USER_ID_HIER" MET JOU REGTE USER ID! ***
+        emailjs.init("JOU_EMAILJS_USER_ID_HIER");
 
-        // Track form progress
-        function updateProgress() {
-            const totalQuestions = 20;
-            const completedQuestions = Array.from(document.querySelectorAll('.question-group')).filter(group => {
-                const selects = group.querySelectorAll('select');
-                // A question is "completed" if all its selects have a value
-                return Array.from(selects).every(select => select.value !== '');
-            }).length;
+        // Funksie om individuele vraagranglys te valideer
+        function validateRankings(questionNumber) {
+            const selects = document.querySelectorAll(`select[name^="q${questionNumber}_"]`);
+            const selectedValues = Array.from(selects).map(select => select.value);
+            const errorElement = document.getElementById(`error_q${questionNumber}`);
             
-            const progress = (completedQuestions / totalQuestions) * 100;
-            progressFill.style.width = progress + '%';
-        }
-
-        // Validate rankings for each question
-        function validateRankings(questionNum) {
-            const selects = document.querySelectorAll(`select[name^="q${questionNum}_"]`);
-            const values = Array.from(selects).map(select => select.value).filter(value => value !== '');
-            
-            // Convert values to numbers for comparison
-            const numericValues = values.map(Number);
-
-            // Check for duplicates only if all 4 values are selected
-            const hasDuplicates = (new Set(numericValues)).size !== numericValues.length;
-            const allSelected = values.length === 4;
-
-            const errorDiv = document.getElementById(`error_q${questionNum}`);
-            
-            if (allSelected && hasDuplicates) {
-                errorDiv.style.display = 'block';
-                return false;
-            } else {
-                errorDiv.style.display = 'none';
-                return true;
+            // Versteek enige vorige foutboodskap
+            if (errorElement) {
+                errorElement.style.display = 'none';
+                errorElement.textContent = '';
             }
+
+            // Kontroleer of alle opsies gekies is
+            if (selectedValues.includes('')) {
+                if (errorElement) {
+                    errorElement.textContent = 'Alle opsies in hierdie vraag moet gekies word.';
+                    errorElement.style.display = 'block';
+                }
+                return false;
+            }
+
+            // Kontroleer vir duplikate
+            const uniqueValues = new Set(selectedValues);
+            if (uniqueValues.size !== selectedValues.length) {
+                if (errorElement) {
+                    errorElement.textContent = 'Elke rang moet net een keer per vraag gebruik word (1-4).';
+                    errorElement.style.display = 'block';
+                }
+                return false;
+            }
+            return true;
         }
 
-        // Add event listeners to all select elements
-        document.querySelectorAll('select').forEach(select => {
-            select.addEventListener('change', function() {
-                const questionNum = this.name.match(/q(\d+)_/)[1];
-                validateRankings(questionNum);
-                updateProgress();
-                
-                // Update visual selection
-                const optionItem = this.closest('.option-item');
-                if (this.value) {
-                    optionItem.classList.add('selected');
-                } else {
-                    optionItem.classList.remove('selected');
-                }
-            });
-        });
-
-        // Calculate DiSC scores
+        // Funksie om DiSC-tellings te bereken
         function calculateScores(formData) {
             const scores = { D: 0, I: 0, S: 0, C: 0 };
-            
-            for (let i = 1; i <= 20; i++) {
-                const dValue = parseInt(formData.get(`q${i}_d`)) || 0;
-                const iValue = parseInt(formData.get(`q${i}_i`)) || 0;
-                const sValue = parseInt(formData.get(`q${i}_s`)) || 0;
-                const cValue = parseInt(formData.get(`q${i}_c`)) || 0;
-                
-                // Convert ranking to score (1=4 points, 2=3 points, 3=2 points, 4=1 point)
-                scores.D += (5 - dValue);
-                scores.I += (5 - iValue);
-                scores.S += (5 - sValue);
-                scores.C += (5 - cValue);
+            // Loop deur alle geselekteerde waardes van die vorm
+            for (let i = 1; i <= 20; i++) { // Loop deur elke vraag (q1 tot q20)
+                for (let rank = 1; rank <= 4; rank++) { // Loop deur elke rang in die vraag
+                    const selectElement = document.querySelector(`select[name="q${i}_${rank}"]`);
+                    if (selectElement && selectElement.value !== '') {
+                        // Tel die tipe wat ooreenstem met die rang 1 (Meeste Soos Ek)
+                        // Dit is die "Meeste" kolom in jou vraelys. As die gebruiker 'D' as 1 rangskik, tel D op.
+                        if (selectElement.value === 'D' && rank === 1) scores.D++;
+                        if (selectElement.value === 'I' && rank === 1) scores.I++;
+                        if (selectElement.value === 'S' && rank === 1) scores.S++;
+                        if (selectElement.value === 'C' && rank === 1) scores.C++;
+
+                        // Tel die tipe wat ooreenstem met die rang 4 (Minste Soos Ek)
+                        // Dit is die "Minste" kolom in jou vraelys. As die gebruiker 'D' as 4 rangskik, trek D af.
+                        if (selectElement.value === 'D' && rank === 4) scores.D--;
+                        if (selectElement.value === 'I' && rank === 4) scores.I--;
+                        if (selectElement.value === 'S' && rank === 4) scores.S--;
+                        if (selectElement.value === 'C' && rank === 4) scores.C--;
+                    }
+                }
             }
             return scores;
         }
 
-        // Display DiSC results on the chart
+
+        // Funksie om resultate op die webblad te vertoon
         function displayResults(scores) {
-            // Update score text
-            dScoreSpan.textContent = scores.D;
-            iScoreSpan.textContent = scores.I;
-            sScoreSpan.textContent = scores.S;
-            cScoreSpan.textContent = scores.C;
+            document.getElementById('results').style.display = 'block'; // Wys die resultate afdeling
+            
+            const maxScoreForDisplay = 40; // Gebruik dieselfde maksimum telling as vir e-pos vir konsekwentheid
 
-            // Calculate percentage for bar width (assuming max possible score is 20 questions * 4 points/question = 80)
-            const maxScore = 20 * 4; 
+            // Werk D-telling op
+            document.getElementById('dScoreDisplay').innerText = `D: ${scores.D}`;
+            document.getElementById('dProgressBar').style.width = ((scores.D / maxScoreForDisplay) * 100) + '%';
+            
+            // Werk I-telling op
+            document.getElementById('iScoreDisplay').innerText = `I: ${scores.I}`;
+            document.getElementById('iProgressBar').style.width = ((scores.I / maxScoreForDisplay) * 100) + '%';
+            
+            // Werk S-telling op
+            document.getElementById('sScoreDisplay').innerText = `S: ${scores.S}`;
+            document.getElementById('sProgressBar').style.width = ((scores.S / maxScoreForDisplay) * 100) + '%';
+            
+            // Werk C-telling op
+            document.getElementById('cScoreDisplay').innerText = `C: ${scores.C}`;
+            document.getElementById('cProgressBar').style.width = ((scores.C / maxScoreForDisplay) * 100) + '%';
 
-            dBar.style.width = ((scores.D / maxScore) * 100) + '%';
-            iBar.style.width = ((scores.I / maxScore) * 100) + '%';
-            sBar.style.width = ((scores.S / maxScore) * 100) + '%';
-            cBar.style.width = ((scores.C / maxScore) * 100) + '%';
-
-            dBar.textContent = scores.D; // Display score inside bar
-            iBar.textContent = scores.I;
-            sBar.textContent = scores.S;
-            cBar.textContent = scores.C;
-
-            resultsContainer.style.display = 'block'; // Show the results section
-            // Optional: Scroll to results
-            resultsContainer.scrollIntoView({ behavior: 'smooth' });
+            // Rol af na die resultate
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
         }
 
 
+        // HOOF LOGIKA: Wanneer die vorm ingedien word
         document.getElementById('discForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
+            event.preventDefault(); // Voorkom die verstek vorm indiening (bladsy sal nie herlaai nie)
 
-            // Validate all questions before submission
+            // Valideer alle vrae voordat dit ingedien word
             let allValid = true;
             for (let i = 1; i <= 20; i++) {
                 if (!validateRankings(i)) {
                     allValid = false;
                 }
-                // Also check if all options in a group are selected
-                const selects = document.querySelectorAll(`select[name^="q${i}_"]`);
-                const allOptionsSelected = Array.from(selects).every(select => select.value !== '');
-                if (!allOptionsSelected) {
-                    document.getElementById(`error_q${i}`).textContent = 'Alle opsies in hierdie vraag moet gekies word.';
-                    document.getElementById(`error_q${i}`).style.display = 'block';
-                    allValid = false;
-                }
+            }
+
+            // Valideer ook die gebruikersnaam
+            const userNameInput = document.getElementById('userName'); // Gebruik 'userNameInput' om botsing te vermy
+            if (!userNameInput || !userNameInput.value.trim()) {
+                alert('Vul asseblief jou naam in.');
+                return; // Stop indiening as naam leeg is
             }
 
             if (!allValid) {
                 alert('Voltooi asseblief alle vrae korrek voordat u indien.');
-                return; // Stop the submission if not all valid
+                return; // Stop die indiening as nie alles geldig is nie
             }
 
             const formData = new FormData(this);
-            const scores = calculateScores(formData);
+            const scores = calculateScores(formData); // Bereken die tellings
+            displayResults(scores); // Vertoon die tellings op die webblad
 
-            // Display results on the page
-            displayResults(scores);
-	const maxPossibleScore = 40; // <-- PAS HIERDIE WAARDE AAN AS U DISC METODOLOGIE VERSKIL!
+            // --- NUWE AANPASSING: Voorbereiding vir EmailJS data ---
+            const maxPossibleScore = 40; // <-- PAS HIERDIE WAARDE AAN AS JOU DISC METODOLOGIE VERSKIL!
 
+            // Bereken persentasies vir die gekleurde deel van die staaf
             const d_score_percentage = ((scores.D / maxPossibleScore) * 100).toFixed(0);
             const i_score_percentage = ((scores.I / maxPossibleScore) * 100).toFixed(0);
             const s_score_percentage = ((scores.S / maxPossibleScore) * 100).toFixed(0);
             const c_score_percentage = ((scores.C / maxPossibleScore) * 100).toFixed(0);
+
+            // NUWE AANPASSING: Bereken die oorblywende persentasies vir die grys deel van die staaf in die e-pos sjabloon
+            // EmailJS se sjabloon-enjin kan nie wiskundige bewerkings direk doen nie, so ons doen dit hier
+            const d_remainder_percentage = (100 - parseInt(d_score_percentage)).toFixed(0);
+            const i_remainder_percentage = (100 - parseInt(i_score_percentage)).toFixed(0);
+            const s_remainder_percentage = (100 - parseInt(s_score_percentage)).toFixed(0);
+            const c_remainder_percentage = (100 - parseInt(c_score_percentage)).toFixed(0);
+
+            // Berei die parameters voor om na EmailJS te stuur
             const templateParams = {
-		user_name: userName.value,
-    		// Stuur die rou tellings (as die sjabloon dit benodig, of verwyder dit as jy net persentasies stuur)
-   		d_score: scores.D,
-    		i_score: scores.I,
-    		s_score: scores.S,
-    		c_score: scores.C,
-   	 	// Stuur die persentasies met die korrekte naam
-    		d_score_percentage: d_score_percentage,
-    		i_score_percentage: i_score_percentage,
-    		s_score_percentage: s_score_percentage,
-    		c_score_percentage: c_score_percentage
+                user_name: userNameInput.value, // Gebruik die nuwe naam 'userNameInput'
+                // Stuur die rou tellings (as die e-pos sjabloon dit benodig, wat dit doen vir die nommers)
+                d_score: scores.D,
+                i_score: scores.I,
+                s_score: scores.S,
+                c_score: scores.C,
+                // Stuur die berekende vol-persentasies vir die gekleurde deel van die staaf
+                d_score_percentage: d_score_percentage,
+                i_score_percentage: i_score_percentage,
+                s_score_percentage: s_score_percentage,
+                c_score_percentage: c_score_percentage,
+                // NUWE AANPASSING: Stuur die berekende oorblywende persentasies vir die grys deel van die staaf
+                d_remainder_percentage: d_remainder_percentage,
+                i_remainder_percentage: i_remainder_percentage,
+                s_remainder_percentage: s_remainder_percentage,
+                c_remainder_percentage: c_remainder_percentage
             };
 
+            // --- NUWE AANPASSING: Stuur die e-pos met EmailJS ---
+            // VERSEKER DAT 'service_cv71ym3' EN 'template_j1u5nyo' KORREK IS VIR JOU EMAILJS REKENING!
+            // As jy die sjabloon in EmailJS oorskryf het, is die 'template_j1u5nyo' waarskynlik nog korrek.
             emailjs.send('service_cv71ym3', 'template_j1u5nyo', templateParams)
                 .then(function(response) {
-                    alert('DiSC resultate is gestuur!');
+                    console.log('E-pos suksesvol gestuur!', response.status, response.text);
+                    // Wys 'n suksesboodskap aan die gebruiker
+                    const emailStatusElement = document.getElementById('emailStatus');
+                    if (emailStatusElement) {
+                        emailStatusElement.innerText = 'Jou DiSC-resultate is suksesvol gestuur! Ons sal binnekort met u in verbinding tree.';
+                        emailStatusElement.style.color = 'green';
+                    } else {
+                        alert('Jou DiSC-resultate is suksesvol gestuur! Ons sal binnekort met u in verbinding tree.');
+                    }
+                    // Opsioneel: Maak die vorm skoon of herlei die gebruiker na 'n dankie bladsy
+                    // document.getElementById('discForm').reset();
                 }, function(error) {
-                    alert('Fout met e-pos stuur: ' + error.text);
+                    console.error('Fout tydens die stuur van die e-pos:', error);
+                    // Wys 'n foutboodskap aan die gebruiker
+                    const emailStatusElement = document.getElementById('emailStatus');
+                    if (emailStatusElement) {
+                        emailStatusElement.innerText = 'Fout tydens stuur van resultate. Probeer asseblief weer of kontak ons direk. Fout: ' + error.text;
+                        emailStatusElement.style.color = 'red';
+                    } else {
+                        alert('Fout tydens stuur van resultate. Probeer asseblief weer of kontak ons direk. Fout: ' + error.text);
+                    }
                 });
         });
+
+        // Hieronder is 'n voorbeeld van hoe jou 'validateRankings', 'calculateScores' en 'displayResults' 
+        // funksies kan lyk. Maak seker jou werklike implementering is korrek en pas by jou HTML se name.
+        // Die 'calculateScores' funksie hier is gebaseer op die snippet in 'Disk java code vir github.docx'
+        // en neem aan dat die waardes van die select-elemente direk die D,I,S,C kategorie verteenwoordig.
+
+        // Belangrike Nota: Vir die calculateScores funksie hierbo, het ek dit gebaseer op
+        // die algemene DiSC metodologie waar jy vir "Meeste" 'n punt kry en vir "Minste" 'n punt aftrek.
+        // As jou 'select name' attributte anders gestruktureer is (bv. 'q1_most' en 'q1_least'),
+        // dan moet die 'calculateScores' funksie aangepas word.
+        // Huidige aanname: select name="q#_rang" en value="D/I/S/C"
+        // Bv. <select name="q1_1"> (vir rang 1), <select name="q1_4"> (vir rang 4)
     </script>
 </body>
 </html>
