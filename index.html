@@ -1344,6 +1344,13 @@
 
             // Display results on the page
             displayResults(scores);
+		Calculate percentages for EmailJS template, just like in displayResults
+    const maxScore = 20 * 4; // Use the same maxScore for consistency
+
+    const dScorePercentage = ((scores.D / maxScore) * 100).toFixed(0); // .toFixed(0) for whole number percentage
+    const iScorePercentage = ((scores.I / maxScore) * 100).toFixed(0);
+    const sScorePercentage = ((scores.S / maxScore) * 100).toFixed(0);
+    const cScorePercentage = ((scores.C / maxScore) * 100).toFixed(0);
 
             const templateParams = {
 		user_name: userName.value, // Get the actual value from the input field
@@ -1351,6 +1358,10 @@
                 i_score: scores.I,
                 s_score: scores.S,
                 c_score: scores.C
+		    d_score_percentage: dScorePercentage,
+        i_score_percentage: iScorePercentage,
+        s_score_percentage: sScorePercentage,
+        c_score_percentage: cScorePercentag
             };
 
             emailjs.send('service_cv71ym3', 'template_j1u5nyo', templateParams)
