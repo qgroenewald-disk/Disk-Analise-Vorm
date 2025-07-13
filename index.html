@@ -10,9 +10,9 @@
 
     <!-- Open Graph meta-etikette vir sosiale media deel (bv. WhatsApp) -->
     <meta property="og:title" content="DISK Persoonlikheidsanalise">
-    <meta property="og:description" content="Voltooi jou DISK persoonlikheidsanalise en sien jou resultate.">
+    <meta property="og:description" content="Voltooi jou DiSC persoonlikheidsanalise en sien jou resultate.">
     <meta property="og:image" content="https://i.imgur.com/dhoRivl.png">
-    <meta property="og:url" content="https://qgroenewald-disk.github.io/Disk-Analise-Vorm/"> <!-- Opgedateer met jou werklike webwerf URL -->
+    <meta property="og:url" content="https://qgroenewald-disk.github.io/Disk-Analise-Vorm/">
     <meta property="og:type" content="website">
 
 
@@ -44,31 +44,31 @@
         }
         header {
             display: flex;
-            flex-direction: column; /* Stack items vertically */
-            align-items: flex-start; /* Align content to the left */
+            flex-direction: column; /* Stapel items vertikaal */
+            align-items: flex-start; /* Belyn inhoud na links */
             border-bottom: 2px solid var(--primary-color);
             margin-bottom: 20px;
             padding-bottom: 20px;
-            padding-left: 10px; /* Small padding for the whole header content */
+            padding-left: 10px; /* Klein opvulling vir die hele opskrifinhoud */
         }
         .logo-and-title-wrapper {
-            display: flex; /* For logo and h1 side-by-side */
-            align-items: center; /* Vertically center logo and h1 */
-            gap: 15px; /* Space between logo and h1 */
-            margin-bottom: 15px; /* Space between title line and instructions */
-            width: 100%; /* Ensure it takes full width to allow text-align within */
+            display: flex; /* Vir logo en h1 langs mekaar */
+            align-items: center; /* Vertikaal sentreer logo en h1 */
+            gap: 15px; /* Spasie tussen logo en h1 */
+            margin-bottom: 15px; /* Spasie tussen titelreël en instruksies */
+            width: 100%; /* Verseker dit neem volle breedte in om teksbelyning binne toe te laat */
         }
         .logo {
             width: 100px;
             height: auto;
             border-radius: 5px;
-            flex-shrink: 0; /* Prevent logo from shrinking */
+            flex-shrink: 0; /* Verhoed dat logo krimp */
         }
         .logo-and-title-wrapper h1 {
             color: var(--primary-color);
-            margin: 0; /* Remove default margin from h1 */
-            text-align: left; /* Ensure title aligns left within its wrapper */
-            flex-grow: 1; /* Allow title to take remaining space */
+            margin: 0; /* Verwyder verstekmarge van h1 */
+            text-align: left; /* Verseker dat titel links belyn binne sy omhulsel */
+            flex-grow: 1; /* Laat titel toe om oorblywende spasie op te neem */
         }
         .instructions {
             background-color: #e7f3fe;
@@ -77,9 +77,9 @@
             border-radius: 5px;
             font-size: 0.95em;
             text-align: left;
-            margin-top: 0; /* Override default margin if any */
-            width: 100%; /* Ensure instructions take full width */
-            box-sizing: border-box; /* Include padding in width calculation */
+            margin-top: 0; /* Oorskryf verstekmarge indien enige */
+            width: 100%; /* Verseker dat instruksies volle breedte inneem */
+            box-sizing: border-box; /* Sluit opvulling in by breedteberekening */
         }
         .form-group {
             margin-bottom: 20px;
@@ -101,7 +101,7 @@
             padding: 20px;
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            border-left: 4px solid var(--primary-color); /* Added left border */
+            border-left: 4px solid var(--primary-color); /* Bygevoegde linkerboord */
         }
         .question-block h3 {
             margin-top: 0;
@@ -189,7 +189,7 @@
         // Initialiseer EmailJS met jou Public Key
         (function(){
             emailjs.init({
-                publicKey: "rES387Z_beB0IEiRm", // Replace with your actual EmailJS Public Key
+                publicKey: "rES387Z_beB0IEiRm", // Vervang met jou werklike EmailJS Public Key
             });
         })();
     </script>
@@ -198,7 +198,7 @@
     <div class="container">
         <header>
             <div class="logo-and-title-wrapper">
-                <img src="https://i.imgur.com/G6NIgq3.jpeg" alt="DiSC Analysis Logo" class="logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/cccccc/000000?text=Logo';">
+                <img src="https://i.imgur.com/dhoRivl.png" alt="DISK Analise Logo" class="logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/cccccc/000000?text=Logo';">
                 <h1>DISK Persoonlikheidsanalise</h1>
             </div>
             <p class="instructions">
@@ -213,7 +213,7 @@
                 <input type="text" id="userName" name="userName" required>
             </div>
             <div id="questions-container">
-                <!-- Questions will be generated here by JavaScript -->
+                <!-- Vrae sal hier deur JavaScript gegenereer word -->
             </div>
             <div id="form-error" class="error-message"></div>
             <button type="submit" id="submit-btn">Dien in en Sien Resultate</button>
@@ -415,25 +415,25 @@
             const form = document.getElementById('disc-form');
             const formError = document.getElementById('form-error');
             const resultsText = document.getElementById('results-text');
-            const scoring = { 1: 4, 2: 3, 3: 2, 4: 1 }; // Scoring: 1st choice gets 4 points, 4th choice gets 1 point
+            const scoring = { 1: 4, 2: 3, 3: 2, 4: 1 }; // Telling: 1ste keuse kry 4 punte, 4de keuse kry 1 punt
 
-            // Function to generate the dropdown options for 1-4
+            // Funksie om die aftreklys opsies vir 1-4 te genereer
             function generateDropdownOptions() {
-                let optionsHtml = '<option value="">Kies</option>'; // Default empty option
+                let optionsHtml = '<option value="">Kies</option>'; // Verstek leë opsie
                 for (let i = 1; i <= 4; i++) {
                     optionsHtml += `<option value="${i}">${i}</option>`;
                 }
                 return optionsHtml;
             }
 
-            // Function to validate a single question block
+            // Funksie om 'n enkele vraagblok te valideer
             function validateQuestion(questionIndex) {
                 const inputs = Array.from(document.getElementsByName(`q${questionIndex}`));
-                const values = inputs.map(input => input.value).filter(v => v !== ''); // Filter out empty strings
+                const values = inputs.map(input => input.value).filter(v => v !== ''); // Filtreer leë stringe uit
                 const valueSet = new Set(values);
                 const errorEl = document.getElementById(`q-error-${questionIndex}`);
 
-                errorEl.style.display = 'none'; // Hide previous error for this question
+                errorEl.style.display = 'none'; // Versteek vorige fout vir hierdie vraag
 
                 if (values.length !== 4) {
                     errorEl.textContent = "Alle opsies vir hierdie vraag moet ingevul word (1-4).";
@@ -444,7 +444,7 @@
                     errorEl.style.display = 'block';
                     return false;
                 }
-                return true; // Question is valid
+                return true; // Vraag is geldig
             }
 
             function generateQuestions() {
@@ -469,19 +469,19 @@
                     `;
                     questionsContainer.appendChild(questionBlock);
 
-                    // Add change event listeners to each select dropdown in this question block
+                    // Voeg veranderingsgebeurtenisluisteraars by elke aftreklys in hierdie vraagblok
                     const selectElements = questionBlock.querySelectorAll('select');
                     selectElements.forEach(select => {
                         select.addEventListener('change', () => {
-                            // Get all selects for the current question block
+                            // Kry alle keuses vir die huidige vraagblok
                             const currentQuestionInputs = Array.from(questionBlock.querySelectorAll('select'));
                             const allSelected = currentQuestionInputs.every(input => input.value !== '');
 
                             if (allSelected) {
-                                // If all 4 options are selected, then validate this specific question
+                                // As al 4 opsies gekies is, valideer dan hierdie spesifieke vraag
                                 validateQuestion(index);
                             } else {
-                                // If not all are selected, ensure the error message for this question is hidden
+                                // As nie almal gekies is nie, verseker dat die foutboodskap vir hierdie vraag versteek is
                                 document.getElementById(`q-error-${index}`).style.display = 'none';
                             }
                         });
@@ -493,19 +493,19 @@
                 event.preventDefault();
 
                 formError.style.display = 'none';
-                // Clear all individual question errors before re-validating for submission
+                // Vee alle individuele vraagfoute uit voordat dit weer vir indiening gevalideer word
                 document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
 
                 let overallFormIsValid = true;
                 const scores = { D: 0, I: 0, S: 0, C: 0 };
 
-                // Validate each question and accumulate scores
+                // Valideer elke vraag en versamel tellings
                 for (let i = 0; i < questions.length; i++) {
-                    const questionIsValid = validateQuestion(i); // Run final validation for each question
+                    const questionIsValid = validateQuestion(i); // Voer finale validering vir elke vraag uit
                     if (!questionIsValid) {
                         overallFormIsValid = false;
                     } else {
-                        // If valid, calculate scores for this question
+                        // As geldig, bereken tellings vir hierdie vraag
                         const inputs = Array.from(document.getElementsByName(`q${i}`));
                         inputs.forEach(input => {
                             const rank = parseInt(input.value, 10);
@@ -517,7 +517,7 @@
                     }
                 }
 
-                // Validate user name
+                // Valideer gebruikersnaam
                 if (!document.getElementById('userName').value.trim()) {
                     formError.textContent = "Vul asseblief jou volle naam in.";
                     formError.style.display = 'block';
@@ -525,14 +525,14 @@
                 }
 
                 if (!overallFormIsValid) {
-                    // Show a general form error if any specific question errors or name error exist
+                    // Wys 'n algemene vormfout as enige spesifieke vraagfoute of naamfout bestaan
                     formError.textContent = "Daar is foute in jou antwoorde. Maak asseblief seker jou naam is ingevul en dat alle vrae korrek beantwoord is.";
                     formError.style.display = 'block';
-                    window.scrollTo(0, 0); // Scroll to top to show general error if any
+                    window.scrollTo(0, 0); // Rol na bo om algemene fout te wys indien enige
                     return;
                 }
 
-                // If all validations pass, display results and send email
+                // As alle validerings slaag, vertoon resultate en stuur e-pos
                 displayResults(scores);
                 sendEmailWithResults(scores);
             }
@@ -554,7 +554,7 @@
             function sendEmailWithResults(scores) {
                 const emailStatus = document.getElementById('email-status');
                 emailStatus.textContent = "Stuur tans resultate per e-pos...";
-                emailStatus.className = ''; // Clear previous status classes
+                emailStatus.className = ''; // Vee vorige statusklasse uit
 
                 const templateParams = {
                     name: document.getElementById('userName').value,
@@ -562,7 +562,7 @@
                     i_score: scores.I,
                     s_score: scores.S,
                     c_score: scores.C
-                    // chart_image is intentionally removed as per previous request
+                    // chart_image is doelbewus verwyder soos per vorige versoek
                 };
 
                 emailjs.send('service_cv71ym3', 'template_j1u5nyo', templateParams)
@@ -577,7 +577,7 @@
                     });
             }
 
-            // Initialize questions and form listener
+            // Inisialiseer vrae en vormluisteraar
             generateQuestions();
             form.addEventListener('submit', calculateAndShowResults);
         });
