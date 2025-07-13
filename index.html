@@ -10,7 +10,7 @@
 
     <!-- Open Graph meta-etikette vir sosiale media deel (bv. WhatsApp) -->
     <meta property="og:title" content="DISK Persoonlikheidsanalise">
-    <meta property="og:description" content="Voltooi jou DiSC persoonlikheidsanalise en sien jou resultate.">
+    <meta property="og:description" content="Voltooi jou DISK persoonlikheids-analise en sien jou resultate.">
     <meta property="og:image" content="https://i.imgur.com/dhoRivl.png">
     <meta property="og:url" content="https://qgroenewald-disk.github.io/Disk-Analise-Vorm/">
     <meta property="og:type" content="website">
@@ -59,11 +59,25 @@
             width: 100%; /* Verseker dit neem volle breedte in om teksbelyning binne toe te laat */
         }
         .logo {
-            width: 100px;
+            width: 100px; /* Verstek grootte vir groter skerms */
             height: auto;
             border-radius: 5px;
             flex-shrink: 0; /* Verhoed dat logo krimp */
         }
+
+        /* Media query vir kleiner skerms (bv. mobiele fone) */
+        @media (max-width: 640px) {
+            .logo {
+                width: 70px; /* Maak logo kleiner op mobiele fone */
+            }
+            .logo-and-title-wrapper {
+                gap: 10px; /* Verklein gaping op mobiele fone */
+            }
+            .logo-and-title-wrapper h1 {
+                font-size: 1.5em; /* Verklein titelgrootte op mobiele fone indien nodig */
+            }
+        }
+
         .logo-and-title-wrapper h1 {
             color: var(--primary-color);
             margin: 0; /* Verwyder verstekmarge van h1 */
@@ -199,7 +213,7 @@
         <header>
             <div class="logo-and-title-wrapper">
                 <img src="https://i.imgur.com/dhoRivl.png" alt="DISK Analise Logo" class="logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/cccccc/000000?text=Logo';">
-                <h1>DISK Persoonlikheidsanalise</h1>
+                <h1>DISK Persoonlikheids-analise</h1>
             </div>
             <p class="instructions">
                 Vir elke vraag hieronder, rangskik die vier stellings van <strong>1 tot 4</strong>.
@@ -386,7 +400,7 @@
                     questionText: "Een eienskap van my wat nie altyd so positief deur ander ontvang word nie, is die feit dat ek soms:",
                     options: [
                         { text: "Kieskeurig, puntenerig is", value: "C" },
-                        { text: "Op die man af/reguit is", value: "D" },
+                        { text: "Op die man af/reguit is", "value": "D" },
                         { text: "Té tegemoetkomend/inskiklik is", value: "S" },
                         { text: "Mense beïnvloed met my entoesiasme", value: "I" }
                     ]
