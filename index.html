@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DISK Persoonlikheidsanalise</title>
+    <title>Funksioneringstyl Persoonlikheidsanalise</title>
 
-    <!-- Favicon vir die blaaier-oortjie -->
-    <link rel="icon" href="https://i.imgur.com/dhoRivl.png" type="image/png">
+    <link rel="icon" href="https://i.imgur.com/rJ8Rqlp.png" type="image/png">
 
-    <!-- Open Graph meta-etikette vir sosiale media deel (bv. WhatsApp) -->
-    <meta property="og:title" content="DISK Persoonlikheidsanalise">
-    <meta property="og:description" content="Voltooi jou DISK persoonlikheids-analise en sien jou resultate.">
-    <meta property="og:image" content="https://i.imgur.com/dhoRivl.png">
+    <meta property="og:title" content="Funksioneringstyl Persoonlikheidsanalise">
+    <meta property="og:description" content="Voltooi jou Funksioneringstyl persoonlikheids-analise en sien jou resultate.">
+    <meta property="og:image" content="https://i.imgur.com/rJ8Rqlp.png">
     <meta property="og:url" content="https://qgroenewald-disk.github.io/Disk-Analise-Vorm/">
     <meta property="og:type" content="website">
 
@@ -43,8 +41,8 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         header {
-            display: flex;
-            flex-direction: column; /* Stapel items vertikaal */
+            display: flex; /* Stapel items vertikaal */
+            flex-direction: column;
             align-items: flex-start; /* Belyn inhoud na links */
             border-bottom: 2px solid var(--primary-color);
             margin-bottom: 20px;
@@ -212,13 +210,13 @@
     <div class="container">
         <header>
             <div class="logo-and-title-wrapper">
-                <img src="https://i.imgur.com/dhoRivl.png" alt="DISK Analise Logo" class="logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/cccccc/000000?text=Logo';">
-                <h1>DISK Persoonlikheids-analise</h1>
+                <img src="https://i.imgur.com/rJ8Rqlp.png" alt="Funksioneringstyl Analise Logo" class="logo" onerror="this.onerror=null;this.src='https://placehold.co/100x100/cccccc/000000?text=Logo';">
+                <h1>Funksioneringstyl Persoonlikheids-analise</h1>
             </div>
             <p class="instructions">
-                Vir elke vraag hieronder, rangskik die vier stellings van <strong>1 tot 4</strong>.
-                <br><strong>1</strong> = Beskryf my die beste; <strong>4</strong> = Beskryf my die minste.
-                <br>Elke nommer (1, 2, 3, 4) mag slegs <strong>een keer per vraag</strong> gebruik word.
+                Vir elke vraag hieronder, rangskik die vier stellings van **1 tot 4**.
+                <br>**1** = Beskryf my die beste; **4** = Beskryf my die minste.
+                <br>Elke nommer (1, 2, 3, 4) mag slegs **een keer per vraag** gebruik word.
             </p>
         </header>
         <form id="disc-form">
@@ -227,8 +225,7 @@
                 <input type="text" id="userName" name="userName" required>
             </div>
             <div id="questions-container">
-                <!-- Vrae sal hier deur JavaScript gegenereer word -->
-            </div>
+                </div>
             <div id="form-error" class="error-message"></div>
             <button type="submit" id="submit-btn">Dien in en Sien Resultate</button>
         </form>
@@ -556,10 +553,10 @@
                 resultsContainer.classList.remove('hidden');
 
                 resultsText.innerHTML = `
-                    <p><strong>Dominance (D):</strong> ${scores.D}</p>
-                    <p><strong>Influence (I):</strong> ${scores.I}</p>
-                    <p><strong>Steadiness (S):</strong> ${scores.S}</p>
-                    <p><strong>Conscientiousness (C):</strong> ${scores.C}</p>
+                    <p>**Dominance (D):** ${scores.D}</p>
+                    <p>**Influence (I):** ${scores.I}</p>
+                    <p>**Steadiness (S):** ${scores.S}</p>
+                    <p>**Conscientiousness (C):** ${scores.C}</p>
                 `;
 
                 resultsContainer.scrollIntoView({ behavior: 'smooth' });
